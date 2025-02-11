@@ -158,14 +158,78 @@ Lưu ý: HTTP là giao thức không liên tục
     Nội dung
 </pre>
 ```
+
 ## HTML Entity
 
 Dạng thực thể của html
 
 < => &lt;
+
 > => &gt;
 
-Tác dụng: 
+Tác dụng:
 
 - Không bị trình duyệt thay đổi hoặc biên dịch
 - Khắc phục lỗi bảo mật XSS
+
+## Các thẻ inline
+
+1. Thẻ chèn liên kết
+
+a = anchor
+
+```
+<a href="dia_chi_trang_web">Nội dung hiển thị</a>
+```
+
+Thuộc tính:
+
+- href: Địa chỉ trang web (URL) hoặc đường dẫn tương đối
+- title: Tiêu đề khi trỏ chuột vào liên kết
+- target: Cửa sổ sẽ mở liên kết
+
+* `_self`: Mở ở tab hiện tại
+* `_blank`: Mở ở tab mới
+
+Đường dẫn tương đối: Bị ảnh hưởng nếu thay đổi cấp thư mục
+
+```
+Loại 1: ./duong-dan hoặc duong-dan
+Loại 2: ../duong-dan
+```
+
+Đường dẫn tuyệt đối: Không bị ảnh hưởng bởi cấp thư mục
+
+```
+Loại 1: URL đầy đủ (http://tenmien/duong-dan)
+Loại 2: /duong-dan (Đẩy về gốc của url)
+Loại 3: //tenmien/duong-dan
+```
+
+Giải thích:
+
+Tên miền hiện tại: http://127.0.0.1:63130
+
+//tenmien --> Nối giao thức hiện tại: http: + //tenmien -> http://tenmien -> http://google.com
+
+2. Thẻ chèn hình ảnh (img)
+
+```
+<img src="duong-dan-anh" alt="Nội dung thay thế" title="Tiêu đề khi trỏ chuột" width="chieu-rong" height="chieu-cao"/>
+```
+
+3. Thẻ định dạng kiểu (span)
+
+- span: Thẻ html non-semantic (Không có ý nghĩa)
+- Hỗ trợ định dạng inline (Có sự can thiệp của css)
+
+## Form (Biểu mẫu)
+
+Cấu tạo của form
+
+Form => Danh sách các trường và nút gửi
+
+Các form không được lồng nhau
+
+- action: URL của server để gửi dữ liệu lên
+- method: Phương thức gửi dữ liệu: GET, POST
