@@ -1,0 +1,21 @@
+h2 {
+  color: red;
+}
+h2:hover {
+  color: green;
+}
+h2:active {
+  color: blueviolet;
+}
+h2:focus {
+  color: blue;
+}
+
+input:focus,
+button:focus,
+textarea:focus {
+  background: yellow;
+}
+input:focus::placeholder {
+  color: red;
+}

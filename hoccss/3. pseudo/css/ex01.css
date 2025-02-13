@@ -1,0 +1,21 @@
+h2::before {
+  content: "A";
+}
+h2::after {
+  content: "B";
+}
+
+p::first-line {
+  color: red;
+}
+p::first-letter {
+  color: green;
+}
+p::selection {
+  background: black;
+  color: yellow;
+}
+input::placeholder,
+input {
+  color: red;
+}

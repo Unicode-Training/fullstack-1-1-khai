@@ -233,3 +233,122 @@ Các form không được lồng nhau
 
 - action: URL của server để gửi dữ liệu lên
 - method: Phương thức gửi dữ liệu: GET, POST
+
+## Đặt tên class, id
+
+- Sử dụng danh từ, đặt bằng Tiếng Anh
+- Dùng chữ thường, nối với nhau bởi gạch ngang
+- Không được bắt đầu bằng số
+
+Lưu ý:
+
+id: Chỉ được đặt 1 id trong 1 thẻ html, không nên đặt trùng id với các thẻ khác
+class: Có thể đặt nhiều class trong 1 thẻ html, mỗi class cách nhau bởi dấu cách
+
+# Ngôn ngữ định dạng CSS
+
+## Cách viết CSS trong trang HTML
+
+Cách 1: Viết trực tiếp CSS trong trang html thông qua thẻ style (Internal CSS)
+
+```
+<style>
+    Code CSS
+</style>
+```
+
+Cách 2: Tách riêng file .css và gọi vào file html thông qua thẻ link (External)
+
+```
+<link href="duong-dan-file-css" rel="stylesheet" />
+```
+
+Cách 3: Viết thuộc tính css trực tiếp trong thẻ html thông qua thuộc tính style (Inline CSS)
+
+## Cấu trúc của CSS
+
+```
+selector {
+    thuoctinh1: giatri1;
+    thuoctinh2: giatri2;
+}
+```
+
+## Selector
+
+1. Selector cơ bản
+
+- id --> #tenid
+- class --> .tenclass
+- tagname --> tagname
+
+2. Selector kết hợp
+
+2.1. Nằm trong
+
+selector1 selector2 selector3
+
+2.1. Cha con
+
+selector1 > selector2 > selector 3
+
+2.3. Cùng cấp
+
+selector1selector2selector3
+
+2.4. Kế thừa
+
+selector1, selector2, selector3
+
+2.5. Nằm sau
+
+selector1 ~ selector2 ~ selector3
+
+Điều kiện
+
+- Ngang hàng
+- Cùng thuộc 1 cha
+
+  2.6. Nằm sau liền kề
+
+selector1 + selector2 + selector3
+
+2.7. Attribute Selector
+
+tagname[tenthuoctinh] --> Chọn thẻ có thuộc tính nào đó
+
+tagname[tenthuoctinh="giatri"] --> Chọn thẻ có thuộc tính = giá trị
+
+tagname[tenthuoctinh^="giatri"] --> Chọn thẻ có thuộc tính bắt đầu chứa giá trị nào đó
+
+tagname[tenthuoctinh*="giatri"] --> Chọn thẻ có thuộc tính chứa giá trị (Không quan tâm đến vị trí)
+
+tagname[tenthuoctinh$="giatri"] --> Chọn thẻ có thuộc tính kết thúc chứa giá trị nào đó
+
+tagname[tenthuoctinh~="giatri"] --> Chọn thẻ có thuộc tính chứa từ giá trị
+
+2.8. Chọn tất cả element
+
+```
+* {
+    code css
+}
+```
+
+## Pseudo
+
+1. Phần tử giả (Pseudo Element)
+
+- before, after
+  => Tạo ra 1 element ở phía trước, sau element đang tác động
+  => Yêu cầu bắt buộc: Phải có thuộc tính content
+- first-line
+- first-letter
+- placeholder
+- selection
+
+2. Lớp giả (Pseudo Class)
+
+- hover --> Trỏ chuột vào element
+- active --> Click và giữ chuột
+- focus --> Áp dụng trong form (Xem ví dụ)

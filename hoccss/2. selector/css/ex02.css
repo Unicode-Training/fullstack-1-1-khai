@@ -1,0 +1,27 @@
+/* ul li a[target] {
+  color: red;
+} */
+
+/* ul li a[href*="unicode.vn"] {
+  color: red;
+} */
+
+/* ul li a[href$=".net"] {
+  color: red;
+} */
+
+/* ul li a[title~="Web"] {
+  color: red;
+} */
+/* 
+[class^="col-"] {
+  color: red;
+} */
+
+/* * {
+  border: 1px solid red;
+} */
+
+ul > * {
+  border: 1px solid red;
+}

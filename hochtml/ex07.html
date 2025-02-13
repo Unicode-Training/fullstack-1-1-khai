@@ -9,11 +9,23 @@
     <form action="" method="get">
       <div>
         <label for="lbl-name">Tên</label>
-        <input type="text" id="lbl-name" placeholder="Tên" name="name" />
+        <input
+          type="text"
+          id="lbl-name"
+          placeholder="Tên"
+          name="name"
+          value="Hoàng An"
+        />
       </div>
       <div>
         <label for="lbl-email">Email</label>
-        <input type="email" id="lbl-email" placeholder="Email" name="email" />
+        <input
+          type="email"
+          id="lbl-email"
+          placeholder="Email"
+          name="email"
+          value="hoangan.web@gmail.com"
+        />
       </div>
       <div>
         <label for="lbl-password">Mật khẩu</label>
@@ -33,20 +45,70 @@
         <input type="file" id="lbl-avatar" name="avatar" />
       </div>
       <div>
+        <label for="lbl-search">Tìm kiếm</label>
+        <input
+          type="search"
+          id="lbl-search"
+          name="search"
+          placeholder="Nhập từ khóa tìm kiếm..."
+        />
+      </div>
+      <div>
+        <label for="lbl-price">Giá</label>
+        <input type="range" id="lbl-price" name="price" value="80" />
+      </div>
+      <div>
         <label for="lbl-birthday">Ngày sinh</label>
-        <input type="date" id="lbl-birthday" name="birthday" />
+        <input
+          type="date"
+          id="lbl-birthday"
+          name="birthday"
+          value="2000-01-01"
+        />
       </div>
       <div>
         <label for="lbl-gender">Giới tính</label>
-        <label> <input type="radio" name="gender" value="male" /> Nam </label>
+        <label>
+          <input type="radio" name="gender" value="male" checked /> Nam
+        </label>
         <label> <input type="radio" name="gender" value="female" /> Nữ </label>
       </div>
       <div>
-        <label for="lbl-gender">Giới tính</label>
-        <label> <input type="radio" name="gender2" value="male" /> Nam </label>
-        <label> <input type="radio" name="gender2" value="female" /> Nữ </label>
+        <label for="lbl-source">Nguồn truy cập</label>
+        <label>
+          <input type="checkbox" name="source" value="facebook" /> Facebook
+        </label>
+        <label>
+          <input type="checkbox" name="source" value="google" /> Google
+        </label>
+        <label>
+          <input type="checkbox" name="source" value="website" /> Website
+        </label>
       </div>
-      <button>Submit</button>
+      <div>
+        <label for="lbl-message">Tin nhắn</label>
+        <textarea
+          name="message"
+          id="lbl-message"
+          placeholder="Tin nhắn..."
+          cols="30"
+          rows="5"
+        >
+Ahihi</textarea
+        >
+      </div>
+      <div>
+        <label for="lbl-province">Tỉnh/Thành phố</label>
+        <select name="province" id="lbl-province">
+          <option value="">Chọn Tỉnh/Thành phố</option>
+          <option value="1">Hà Nội</option>
+          <option value="2" selected>Đà Nẵng</option>
+          <option value="3">Hồ Chí Minh</option>
+        </select>
+      </div>
+      <button type="submit">Submit</button>
+      <button type="button">Button</button>
+      <button type="reset">Reset</button>
     </form>
   </body>
 </html>
