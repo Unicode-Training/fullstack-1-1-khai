@@ -1,0 +1,12 @@
+#red:checked ~ .box .content,
+#red:checked ~ .box label[for="red"] {
+  color: red;
+}
+#green:checked ~ .box .content,
+#green:checked ~ .box label[for="green"] {
+  color: green;
+}
+#blue:checked ~ .box .content,
+#blue:checked ~ .box label[for="blue"] {
+  color: blue;
+}

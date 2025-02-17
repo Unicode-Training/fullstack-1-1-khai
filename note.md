@@ -352,3 +352,49 @@ tagname[tenthuoctinh~="giatri"] --> Chọn thẻ có thuộc tính chứa từ g
 - hover --> Trỏ chuột vào element
 - active --> Click và giữ chuột
 - focus --> Áp dụng trong form (Xem ví dụ)
+- checked --> Khi checkbox hoặc radio được check
+- disabled --> Trường trong form bị vô hiệu hóa (Tồn tại thuộc tính disabled)
+- not --> Loại trừ selector nào đó
+- first-child --> Chọn phần tử con đầu tiên
+- last-child --> Chọn phần tử con cuối cùng
+- first-of-type --> Chọn phần tử đầu tiên cùng kiểu thẻ
+- last-of-type --> Chọn phần tử cuối cùng cùng kiểu thẻ
+- nth-child(stt) --> Chọn phần tử theo số thứ tự
+- nth-of-type(stt) --> Chọn phần tử cùng kiểu theo số thứ tự
+- valid --> Áp dụng với form, khi mà trường có dữ liệu
+
+## Các thuộc tính định dạng văn bản
+
+1. Thuộc tính color
+
+- Thay đổi màu của văn bản
+- Cú pháp: color: mamau|tenmau|transparent
+
+2 giá trị có trong tất cả các thuộc tính css
+
+- interit --> Kế thừa từ cha
+- initial --> Kế thừa từ mặc định trình duyệt
+
+2. Thuộc tính font-size
+
+- Thay đổi cỡ chữ của văn bản
+- Cú pháp: font-size: giatri + donvi
+
+Đơn vị thường sử dụng trong font-size:
+
+- px --> Đơn vị tuyệt đối
+- em --> Tương đối, tỷ lệ theo font-size của cha
+- rem --> Tương đối, tỷ lệ theo font-size mặc định của trình duyệt (Có thể thay đổi được bằng selector html)
+
+3. Thuộc tính line-height
+
+- Thay đổi độ cao của dòng (Giãn dòng)
+- Cú pháp: line-height: value (Tỷ lệ với font-size của chính nó)
+
+4. Thuộc tính font-family
+
+- Thay đổi font chữ
+- Cú pháp: font-family: tenfont1, tenfont2, ...
+  Lưu ý:
+- Nếu tên font có khoảng trắng --> Để trong cặp dấu ""
+- Thứ tự chạy font chữ: từ trái sang phải và chỉ chạy sang font tiếp theo khi font hiện tại bị lỗi hoặc không tải được

@@ -1,4 +1,4 @@
-h2 {
+/* h2 {
   color: red;
 }
 h2:hover {
@@ -18,4 +18,45 @@ textarea:focus {
 }
 input:focus::placeholder {
   color: red;
+} */
+
+/* label input:checked + span {
+  color: red;
+}
+label input:disabled + span {
+  color: gray;
+}
+.field-item:disabled {
+  background: gray;
+} */
+
+/* ul li:not(.active, .current) {
+  color: red;
+} */
+
+/* ul li:not(.active):not(.current) {
+  color: red;
+} */
+
+/* ul li:first-of-type {
+  color: red;
+}
+ul li:last-of-type {
+  color: green;
+} */
+/* ul li:nth-child(odd) {
+  color: red;
+} */
+/* ul li:nth-of-type(5) {
+  color: red;
+} */
+
+/* input:valid + span {
+  color: red;
+} */
+.content {
+  display: none;
+}
+input:checked + .content {
+  display: block;
 }
