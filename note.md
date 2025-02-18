@@ -398,3 +398,153 @@ tagname[tenthuoctinh~="giatri"] --> Chọn thẻ có thuộc tính chứa từ g
   Lưu ý:
 - Nếu tên font có khoảng trắng --> Để trong cặp dấu ""
 - Thứ tự chạy font chữ: từ trái sang phải và chỉ chạy sang font tiếp theo khi font hiện tại bị lỗi hoặc không tải được
+
+5. Thuộc tính text-decoration
+
+- Tạo đường gạch chân, gạch ngang, gạch trên
+- Cú pháp: text-decoration: none|underline|overline|line-through
+
+6. Thuộc tính text-transform
+
+- Tạo văn bản chữ hoa, chữ thường
+- text-transform: none|uppercase|lowercase|capitalize
+
+7. Thuộc tính letter-spacing
+
+- Tạo khoảng cách giữa các ký tự
+- letter-spacing: giatri + donvi
+
+8. Thuộc tính word-spacing
+
+- Tạo khoảng cách giữa các từ
+- word-spacing: giatri + donvi
+
+9. Thuộc tính text-align
+
+- Thay đổi vị trí của văn bản theo chiều ngang
+- text-align: left|center|right|justify
+
+Lưu ý:
+
+- Các thẻ inline trong html đều có thể sử dụng thuộc tính này để căn chỉnh (img, button, span, input)
+- Chỉ căn được text-align ở thẻ block
+
+10. Thuộc tính word-wrap
+
+- wrap văn bản nếu bị tràn theo chiều ngang
+- word-wrap: normal|break-word
+
+11. Thuộc tính text-indent
+
+- Thụt đầu dòng 1 khoảng chỉ định
+- text-index: giatri + donvi
+
+## Thuộc tính background
+
+1. background-color
+
+- Thay đổi màu nền của phần tử html
+- background-color: mamau|tenmau
+
+2. background-image
+
+- Thay đổi hình nền của phần tử html
+- background-image: url(link-anh)
+
+3. background-repeat
+
+- Thay đổi chế độ lặp của ảnh nền
+- background-repeat: repeat|no-repeat|repeat-x|repeat-y
+
+4. background-position
+
+- Thay đổi vị trí của background
+- background-position: x y
+  Mặc định: x = 0, y = 0
+
+Các giá trị thay thế
+
+x = 0 --> left
+x = 50% --> center
+x = 100% --> right
+
+y = 0 --> top
+y = 50% --> center
+y = 100% --> bottom
+
+5. background-size
+
+- Thiết lập kích thước của hình nền
+- background-size: x y
+
+Giá trị đặc biệt
+
+- cover: Lấp đầy khung hiển thị
+- contain: Giữ nguyên tỷ lệ gốc của ảnh nền
+
+6. background-attachment
+
+- Cố định ảnh nền khi kéo thanh cuộc
+- background-attachment: scroll|fixed
+
+7. background
+
+- Gộp tất cả các trường hợp trên
+- background: color image repeat position / size attachment
+
+## Thuộc tính border
+
+- Tạo đường viền cho phần tử html
+- Cấu tạo border = width + style + color
+
+1. border-width: Thiết lập độ dày của viền
+
+- border-width: giatri + donvi
+
+2. border-style: Thiết lập kiều viền
+
+- border-style: none|solid|dashed|dotted|double
+
+3. border-color: Thiết lập màu của viền
+
+- border-color: mau
+
+Cú pháp mở rộng của 3 thuộc tính trên
+
+Công thức:
+
+- border-{side}-width
+- border-{side}-style
+- border-{side}-color
+
+side: top, left, right, bottom
+
+Thuộc tính viết tắt
+
+Cú pháp:
+
+- border: width style color
+- border-{side}: width style color
+
+## Padding
+
+- Thành phần đệm trong border
+- Nếu thẻ html là inline, không thiết lập padding top và bottom
+
+Cú pháp:
+
+padding: value
+padding: value1 value2
+padding: value1 value2 value3
+padding: value1 value2 value3 value4
+
+4 thuộc tính mở rộng
+
+- padding-top
+- padding-left
+- padding-right
+- padding-bottom
+
+padding không có giá trị âm
+
+padding với đơn vị % --> Tỷ lệ theo width theo thẻ cha

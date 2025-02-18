@@ -1,0 +1,8 @@
+.box {
+  border: 5px solid red;
+  width: 500px;
+  /* padding: 30px; */
+  font-size: 1.5em;
+  padding: 2em;
+  box-sizing: border-box;
+}

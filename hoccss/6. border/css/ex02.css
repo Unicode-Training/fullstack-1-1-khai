@@ -1,0 +1,7 @@
+.box {
+  width: 0;
+  height: 0;
+  border: 50px solid;
+  border-color: transparent transparent blueviolet transparent;
+  border-top-width: 0;
+}

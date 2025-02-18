@@ -1,0 +1,36 @@
+.box {
+  background: red;
+  width: 500px;
+  height: 300px;
+  /* border-radius: 10px 0 30px 0; */
+  /* border-radius: 50%; */
+}
+.btn-group {
+  text-align: center;
+}
+.btn {
+  width: 150px;
+  height: 35px;
+  font-size: 1.1rem;
+  border: 0;
+  background: green;
+  color: #fff;
+  border-radius: 99999px;
+  cursor: pointer;
+}
+.btn:hover {
+  background: red;
+}
+.btn-outline {
+  width: 150px;
+  height: 35px;
+  font-size: 1.1rem;
+  background: transparent;
+  border: 2px solid currentColor;
+  border-radius: 9999px;
+  color: green;
+  cursor: pointer;
+}
+.btn-outline:hover {
+  color: red;
+}
