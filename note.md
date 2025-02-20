@@ -548,3 +548,19 @@ padding: value1 value2 value3 value4
 padding không có giá trị âm
 
 padding với đơn vị % --> Tỷ lệ theo width theo thẻ cha
+
+## Margin
+
+## Display
+
+- Thay đổi chế độ hiển thị của thẻ html
+- display: none | inline | block | inline-block
+
+Giá trị phức tạp:
+
+- flex
+- inline-flex
+- grid
+- inline-grid
+- list-item
+- table

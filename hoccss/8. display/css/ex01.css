@@ -1,0 +1,11 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.title {
+  border: 1px solid red;
+  /* display: none; */
+  /* visibility: hidden; */
+  opacity: 0.5;
+  padding: 10px;
+}

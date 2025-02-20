@@ -1,0 +1,22 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  outline: 0;
+}
+.box {
+  width: 70%;
+  border: 1px solid red;
+  padding: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.text {
+  text-align: center;
+}
+span {
+  display: block;
+  border: 1px solid red;
+  margin-top: 20px;
+}
