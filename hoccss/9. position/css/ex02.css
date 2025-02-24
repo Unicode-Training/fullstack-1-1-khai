@@ -1,0 +1,27 @@
+.modal {
+  display: none;
+}
+#modal-toggle:checked + .modal {
+  display: block;
+}
+.modal .modal-dialog {
+  position: fixed;
+  top: 10%;
+  left: 0;
+  right: 0;
+  width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1;
+}
+.modal .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0000007e;
+}

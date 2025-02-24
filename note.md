@@ -564,3 +564,60 @@ Giá trị phức tạp:
 - inline-grid
 - list-item
 - table
+
+## Flex (Flexible Box Module)
+
+- Kỹ thuật chia layout linh hoạt
+- 2 phần
+
+* Flex container --> Thẻ bọc
+* Flex item
+
+1. Các thuộc tính trong nhóm container
+
+- display: flex | inline-flex --> Kích hoạt flexbox
+- flex-direction: Chọn hướng cho trục main (Mặc định nằm ngang)
+
+* row --> Mặc định
+* row-reverse --> Hàng đảo ngược
+* column --> Dọc
+* column-reverse --> Dọc đảo ngược
+
+- justify-content: Điều khiển các item theo hướng song song với trục main
+
+* flex-start
+* center
+* flex-end
+* space-around
+* space-between
+* space-evenly
+
+- align-items: Điều khiển các item theo hướng song song với trục cross
+
+* stretch --> mặc định, kéo dãn các item theo trục cross
+* flex-start --> Nằm ở vị trí start của trục cross
+* center --> Nằm ở giữa
+* flex-end --> Nằm vị trí end
+* baseline --> Căn theo đường baseline
+
+- flex-wrap: Wrap item khi vượt quá container
+
+* nowrap
+* wrap
+* wrap-reverse
+
+- gap: Căn chỉnh khoảng cách giữa các item
+- row-gap: Căn theo hàng
+- column-gap: Căn theo cột
+
+2. Các thuộc tính trong nhóm item
+
+- flex-grow: number ==> Lấp đầy các khoảng cách còn trống của container
+
+- flex-shrink: number ==> Tự động co lại khi số tổng kích thước các item > container
+
+- flex-basis: number + unit ==> Thiết lập kích thước chiều rộng, cao cho item
+
+- flex: grow shrink basis
+
+- order: Sắp xếp thứ tự các item
