@@ -621,3 +621,44 @@ Giá trị phức tạp:
 - flex: grow shrink basis
 
 - order: Sắp xếp thứ tự các item
+
+## Transtion
+
+- Thuộc tính giúp thiết lập hiệu ứng di chuyển của các thuộc tính css
+- Áp dụng các thuộc tính có giá trị là số: color, background, padding, margin, width, height...
+
+1. Thuộc tính transition-property
+
+Chọn thuộc tính css có hiệu ứng di chuyển
+
+- all --> Chọn tất cả
+- tenthuoctinh
+
+Lưu ý: Mỗi thuộc tính cách nhau bởi dấu ,
+
+Ví dụ: transition-property: width, padding-left
+
+2. Thuộc tính transition-duration
+
+Thiết lập thời gian hoàn thành chuyển động (s, ms)
+
+Ví dụ: transition-duration: 1s
+
+3. Thuộc tính transition-delay
+
+Thiết lập thời gian trễ trước khi hiệu ứng di chuyển (s, ms)
+
+4. Thuộc tính transition-timing-function
+
+Thiết lập tốc độ di chuyển
+
+- ease: Chậm - Nhanh - Chậm
+- ease-in: Chậm - Nhanh
+- ease-out: Nhanh - chậm
+- ease-in-out: Chậm - Nhanh - Chậm
+- linear: Đều
+- cubic-bezier(p1,p2,p3,p4)
+
+5. Thuộc tính transtion
+
+transition: property duration delay timing

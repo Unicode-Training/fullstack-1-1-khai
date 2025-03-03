@@ -1,0 +1,22 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.box {
+  width: 600px;
+  margin: 30px auto;
+  border: 1px solid red;
+}
+.box h1 {
+  /* transition-property: padding-left, color, font-size; */
+  /* transition-duration: 3s;
+  transition-timing-function: cubic-bezier(0.09, 0.9, 0.88, 0.12); */
+  transition: padding-left 3s linear, color 3s linear, font-size 3s linear;
+}
+.box:hover h1 {
+  /* transition-delay: 1s; */
+  padding-left: 200px;
+  color: green;
+  /* font-size: 3rem; */
+}
