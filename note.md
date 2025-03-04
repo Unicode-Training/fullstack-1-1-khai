@@ -662,3 +662,43 @@ Thiết lập tốc độ di chuyển
 5. Thuộc tính transtion
 
 transition: property duration delay timing
+
+## Transform
+
+Thay đổi hình dạng ban đầu của phần tử html
+
+- Xoay
+- Nghiêng
+- Phóng to, thu nhỏ
+- Di chuyển
+
+Cú pháp: transform: value
+
+- rotate(angle) --> Xoay phần tử theo trục Z
+- rotateX(angle) --> Xoay phần tử theo trục X
+- rotateY(angle) --> Xoay phần tử theo trục Y
+
+Lưu ý: rotate có thể viết dưới dạng rotate: angle
+
+- scale(x, y) --> Phóng to hoặc thu nhỏ theo trục x, y
+- scaleX(value) --> Phóng to theo trục X
+- scaleY(value) --> Phóng to theo trục Y
+
+Lưu ý: scale có thể viết dưới dạng scale: x y
+
+- skew(x, y) --> Nghiêng theo trục x, y
+- skewX(value) --> Nghiêng theo trục X
+- skewY(value) --> Nghiêng theo trục Y
+
+- translate(x, y) --> Di chuyển phần tử theo trục X, Y (Không làm thay đổi bố cục ban đầu)
+- translateX(value) --> Di chuyển theo trục X
+- translateY(value) --> Di chuyển theo trục Y
+
+Lưu ý:
+
+- Nếu đơn vị là % --> Tỷ lệ với chính nó
+- Tách thuộc tính riêng
+
+translate: x y
+
+Thuộc tính transform-origin: x y --> Chọn vị trí trục (Mặc định: 50% 50%)
