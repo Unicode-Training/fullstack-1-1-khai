@@ -702,3 +702,70 @@ Lưu ý:
 translate: x y
 
 Thuộc tính transform-origin: x y --> Chọn vị trí trục (Mặc định: 50% 50%)
+
+## Animation
+
+- Tạo ra các hiệu ứng phức tạp và liên tục
+- Dựa theo kịch bản được thiết lập sẵn (@keyframes)
+- 2 bước
+
+* Xây dựng @keyframes
+* Sử dụng keyframes (Thông qua thuộc tính animation)
+
+Cú pháp keyframes
+
+```css
+@keyframes ten-keyframe {
+  from {
+    thuoctinh: giatri;
+  }
+  p2 {
+    thuoctinh: giatri;
+  }
+  p3 {
+    thuoctinh: giatri;
+  }
+  to {
+    thuoctinh: giatri;
+  }
+}
+```
+
+- from: 0%
+- to: 100%
+
+Ví dụ: Hoàn thành chuyển động trong 1s, chia thành 4 phần
+
+```css
+@keyframes move {
+  from {
+    top: 0;
+    left: 0;
+  }
+  25% {
+    top: 0;
+    left: 25%;
+  }
+  50% {
+    top: 0;
+    left: 50%;
+  }
+  75% {
+    top: 0;
+    left: 75%;
+  }
+  to {
+    top: 0;
+    left: 100%;
+  }
+}
+```
+
+Các thuộc tính của animation
+
+- animation-name: tenkeyframe
+- animation-duration: Thời gian hoàn thành (s, ms)
+- animation-delay: Thời gian trễ (s, ms)
+- animation-timing-function: Thiết lập tốc độ (Giống transition)
+- animation-interation-count: Số lần lặp lại hiệu ứng (infinite = Liên tục)
+- animation: name duration delay timing count

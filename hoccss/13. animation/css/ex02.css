@@ -1,0 +1,32 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.box {
+  width: 200px;
+  height: 200px;
+  border: 10px solid gray;
+  border-radius: 50%;
+  margin: 30px auto;
+  position: relative;
+}
+.box::before {
+  width: 200px;
+  height: 200px;
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  border: 10px solid;
+  border-color: yellow transparent transparent transparent;
+  border-radius: 50%;
+  animation: loader 1s linear infinite;
+}
+@keyframes loader {
+  to {
+    rotate: 360deg;
+  }
+}
