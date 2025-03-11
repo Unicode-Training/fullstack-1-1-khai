@@ -769,3 +769,53 @@ Các thuộc tính của animation
 - animation-timing-function: Thiết lập tốc độ (Giống transition)
 - animation-interation-count: Số lần lặp lại hiệu ứng (infinite = Liên tục)
 - animation: name duration delay timing count
+
+## Responsive
+
+- Kỹ thuật sử dụng css để thiết kế giao diện đáp ứng với các thiết bị khác nhau (Dựa vào chiều rộng màn hình)
+- Hệ thống lớn: Adaptive (Dựa theo thiết bị để nhận diện)
+
+1. Breakpoint
+
+- Điểm kích thước màn hình mà tại đó giao diện sẽ thay đổi
+- Không có quy ước chung breakpoint cho tất cả dự án
+- Breakpoint phổ biến
+
+* 576px
+* 768px
+* 992px
+* 1200px
+* 1400px
+
+2. Media Queries
+
+Cú pháp của css giúp áp dụng breakpoint --> Chỉnh sửa giao diện theo kích thước màn hình
+
+```css
+@media screen and (max-width: 1399.98px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+@media screen and (max-width: 1199.98px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+@media screen and (max-width: 767.98px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+@media screen and (max-width: 575.98px) {
+  selector {
+    thuoctinh: giatri;
+  }
+}
+```
