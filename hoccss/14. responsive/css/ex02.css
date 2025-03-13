@@ -1,0 +1,127 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border: 0;
+}
+html {
+  font-size: 10px;
+}
+body {
+  font-family: Roboto, sans-serif;
+  line-height: 1.5;
+  color: #333;
+  font-size: 1.6rem;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+ul {
+  list-style: none;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.header {
+  padding: 30px 0;
+}
+.header .header-row {
+  display: flex;
+  align-items: center;
+}
+.header .header-row .primary-menu {
+  margin-left: auto;
+  margin-right: 20px;
+}
+.header .header-row .primary-menu ul {
+  display: flex;
+  gap: 20px;
+  font-weight: 500;
+}
+.header .header-row .contact .btn {
+  display: block;
+  background: #75b7eb;
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 99px;
+}
+@media screen and (max-width: 1299.98px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+@media screen and (max-width: 991.98px) {
+  .header .header-row .menu-toggle {
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    cursor: pointer;
+  }
+  .header .header-row .menu-toggle span {
+    height: 3.5px;
+    background: #333;
+    border-radius: 5px;
+    display: block;
+  }
+  .header .header-row .primary-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+    width: 200px;
+    background: #333;
+    translate: -100%;
+    transition: translate 0.3s ease;
+  }
+  .header .header-row .primary-menu ul {
+    display: block;
+  }
+  .header .header-row .primary-menu ul a {
+    color: #fff;
+    display: block;
+    padding: 15px;
+  }
+  .header .header-row .contact {
+    margin-left: auto;
+    margin-right: 15px;
+  }
+  .header .header-row #menu-toggle:checked ~ .primary-menu {
+    translate: 0;
+  }
+  .header .header-row .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 98;
+    background: #00000071;
+    opacity: 0;
+    visibility: hidden;
+    transition-property: opacity, visibility;
+    transition: 0.3s ease;
+  }
+  .header .header-row #menu-toggle:checked ~ .menu-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .header .header-row .contact {
+    display: none;
+  }
+  .header .header-row .menu-toggle {
+    margin-left: auto;
+  }
+}
