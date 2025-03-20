@@ -1,0 +1,12 @@
+@media screen and (max-width: 767.98px) {
+  .header {
+    background: red;
+  }
+}
+@media screen and (max-width: 991.98px) {
+  .header {
+    display: flex;
+  }
+}
+
+/*# sourceMappingURL=ex03.css.map */

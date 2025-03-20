@@ -1,0 +1,27 @@
+/*Comment css*/
+.header {
+  padding: 30px 0;
+}
+.header .header-row {
+  background: gray;
+}
+.header .header-row .logo {
+  width: 200px;
+}
+.header .header-row .menu {
+  list-style: none;
+}
+.header .header-row .menu > li > a {
+  text-decoration: none;
+}
+.header .header-row .menu > li > a:hover {
+  color: red;
+}
+.header .header-row .menu > li > a::before {
+  content: "";
+}
+.header .header-row .search input[type=text] {
+  border: 0;
+}
+
+/*# sourceMappingURL=ex01.css.map */

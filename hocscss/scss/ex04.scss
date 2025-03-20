@@ -1,0 +1,55 @@
+//Toán tử số học: +, -, *, /, % (Chia lấy dư)
+//Toán tử so sánh: >, <, >=, <=, ==, !=
+//Toán tử luận lý: and, or, not
+
+//Câu lệnh rẽ nhánh
+// $a: 9;
+// @if $a >= 10 {
+//   .box {
+//     padding: 30px;
+//   }
+// } @else {
+//   .box {
+//     width: 100%;
+//   }
+// }
+
+//Vòng lặp
+// @for $i from 1 through 10 {
+//   @if $i % 2 == 0 {
+//     .box-#{$i} {
+//       width: $i * 10px;
+//     }
+//   }
+// }
+
+// $sizes: 40px 60px 80px 100px; //List
+// @each $size in $sizes {
+//   .box-#{$size} {
+//     width: $size * 2;
+//   }
+// }
+
+// $sizes: (small 40px 300) (medium 80px 500) (large 100px 700);
+// @each $name, $size, $weight in $sizes {
+//   .box-#{$name} {
+//     font-size: $size;
+//     font-weight: $weight;
+//   }
+// }
+
+//Map
+$sizes: (
+  //key: value
+  small: 40px,
+  medium: 80px,
+  large: 100px
+);
+@each $name, $size in $sizes {
+  .box-#{$name} {
+    font-size: $size;
+  }
+}
+
+//Ứng dụng vòng lặp, rẽ nhánh, mixin
+//@use, @forward

@@ -819,3 +819,35 @@ Cú pháp của css giúp áp dụng breakpoint --> Chỉnh sửa giao diện th
   }
 }
 ```
+
+# Ngôn ngữ tiền xử lý SCSS
+
+- Ngôn ngữ lập trình (Cú pháp của 1 ngôn ngữ lập trình: biến, toán tử, câu lệnh rẽ nhánh, vòng lặp,...)
+- Thông qua trình biên dịch để chuyển thành css (Trình duyệt chỉ hiểu css)
+- SCSS ngôn ngữ dành cho môi trường dev
+
+Dev (.scss) ==> Build (Complier) ==> Production (.css)
+
+Compiler
+
+- Tải phần mềm desktop
+- IDE
+- NodeJS
+
+## Cài đặt trình biên dịch
+
+npm i sass -g
+
+## Các câu lệnh biên dịch
+
+1. Biên dịch 1 file scss -> css
+
+sass duong-dan-file-scss duong-dan-file-css --watch
+
+2. Biên dịch cả folder scss -> css
+
+sass duong-dan-folder-scss:duong-dan-folder-css --watch
+
+3. Nén file scss -> css (Chuyển thành 1 dòng, loại bỏ comment)
+
+sass duong-dan-file-scss duong-dan-file-css --style compressed

@@ -1,0 +1,32 @@
+//Comment scss
+/*Comment css*/
+
+//Cú pháp lồng selector
+.header {
+  padding: 30px 0;
+  .header-row {
+    background: gray;
+    .logo {
+      width: 200px;
+    }
+    .menu {
+      list-style: none;
+      > li {
+        > a {
+          text-decoration: none;
+          &:hover {
+            color: red;
+          }
+          &::before {
+            content: "";
+          }
+        }
+      }
+    }
+    .search {
+      input[type="text"] {
+        border: 0;
+      }
+    }
+  }
+}
