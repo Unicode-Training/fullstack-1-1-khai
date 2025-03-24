@@ -1,0 +1,29 @@
+$values: none inline inline-block block grid inline-grid table table-cell
+  table-row flex inline-flex;
+$prefix: ".d-";
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+@mixin displayMixin($name: "") {
+  @each $value in $values {
+    $selector: $prefix;
+    @if $name != "" {
+      $selector: $prefix + $name + "-";
+    }
+    #{$selector}#{$value} {
+      display: $value;
+    }
+  }
+}
+
+@include displayMixin();
+
+@each $name, $width in $breakpoints {
+  @media screen and (min-width: $width) {
+    @include displayMixin($name);
+  }
+}

@@ -1,0 +1,7 @@
+//Tách các file scss ra và nối lại
+@use "partials/reset";
+@use "partials/header";
+// @use "partials/variable";
+body {
+  color: header.$secondary-color;
+}

@@ -1,0 +1,17 @@
+@use "./variable" as v; //namespace mặc định là tên file
+//Khi dùng @use để import biến, mixin
+//--> Cần phải có namespace trước tên biến, tên mixin
+@forward "./variable";
+$-header-padding: 30px;
+.header {
+  padding: $-header-padding 0;
+  background: v.$primary-color;
+  .header-row {
+    display: flex;
+  }
+}
+
+//selector
+.box {
+  margin: $-header-padding;
+}
