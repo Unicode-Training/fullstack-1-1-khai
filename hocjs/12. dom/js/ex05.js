@@ -16,19 +16,29 @@ const inputEl = document.querySelector(".todo-form input");
 const buttonEl = document.querySelector(".todo-form button");
 const todoListEl = document.querySelector(".todo-list");
 const todoList = [];
+
+//Thêm todo
 buttonEl.addEventListener("click", function () {
   const value = inputEl.value;
   if (value) {
-    todoList.push(value);
+    const todo = {
+      title: value,
+      completed: false,
+    };
+    todoList.push(todo);
     inputEl.value = "";
     renderTodoList();
   }
 });
 
 const renderTodoList = function () {
+  // console.log(todoList);
   const html = todoList
     .map(function (item) {
-      return `<li>${item} <span class="remove">x</span></li>`;
+      // console.log(item);
+      return `<li><input type="checkbox" ${
+        item.completed ? "checked" : ""
+      }/> <span class="${item.completed ? "completed" : ""}">${item.title}</span> <span class="remove">x</span></li>`;
     })
     .join("");
   todoListEl.innerHTML = html;
@@ -47,4 +57,24 @@ const renderTodoList = function () {
       renderTodoList();
     });
   });
+
+  const completedList = document.querySelectorAll(
+    '.todo-list input[type="checkbox"]'
+  );
+  completedList.forEach(function (item, index) {
+    item.addEventListener("change", function () {
+      const status = item.checked; //Lấy trạng thái của checkbox
+      todoList[index].completed = status;
+      renderTodoList();
+    });
+  });
 };
+
+/*
+[
+ {title: "Job 1", completed: false},
+ {title: "Job 2", completed: false},
+ {title: "Job 3", completed: false},
+ {title: "Job 4", completed: false},
+]
+*/
