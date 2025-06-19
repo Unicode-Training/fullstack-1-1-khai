@@ -14,14 +14,71 @@ const serverApi = `http://localhost:3000`;
 //   .then((data) => {
 //     console.log(data);
 //   });
+const LIMIT = 3;
+let currentPage = 1;
+let order = "asc";
 const getUsers = async (keyword = "") => {
-  let url = `${serverApi}/users`;
+  let url = `${serverApi}/users?_limit=${LIMIT}&_page=${currentPage}&_sort=id&_order=${order}`;
   if (keyword) {
-    url = `${serverApi}/users?q=${keyword}`;
+    url = `${serverApi}/users?q=${keyword}&_limit=${LIMIT}&_page=${currentPage}&_sort=id&_order=${order}`;
   }
   const response = await fetch(url);
   const data = await response.json();
+  const total = response.headers.get("x-total-count");
   renderUsers(data);
+  renderPagination(total);
+};
+
+const handleSortUsers = () => {
+  const latestBtn = document.querySelector(".latest-btn");
+  const oldestBtn = document.querySelector(".oldest-btn");
+  latestBtn.addEventListener("click", () => {
+    order = "desc";
+    getUsers();
+  });
+  oldestBtn.addEventListener("click", () => {
+    order = "asc";
+    getUsers();
+  });
+};
+handleSortUsers();
+
+const renderPagination = (total) => {
+  //Tính tổng số trang
+  const maxPage = Math.ceil(total / LIMIT);
+  const pagination = document.querySelector(".pagination");
+  let html = "";
+  if (currentPage > 1) {
+    html += "<button class='prev'>Prev</button>";
+  }
+  for (let i = 1; i <= maxPage; i++) {
+    html += `<button data-page="${i}" class="${
+      i === currentPage ? "active" : ""
+    }">${i}</button>`;
+  }
+  if (currentPage < maxPage) {
+    html += "<button class='next'>Next</button>";
+  }
+  pagination.innerHTML = html;
+
+  const btnList = pagination.querySelectorAll("button");
+  btnList.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (btn.classList.contains("prev")) {
+        currentPage--;
+        getUsers();
+        return;
+      }
+      if (btn.classList.contains("next")) {
+        currentPage++;
+        getUsers();
+        return;
+      }
+      const page = btn.dataset.page;
+      currentPage = +page;
+      getUsers();
+    });
+  });
 };
 
 const renderUsers = (users) => {
@@ -75,7 +132,11 @@ const renderDataToFrom = (data) => {
   const nameInput = form.querySelector(".name");
   const emailInput = form.querySelector(".email");
   const addressInput = form.querySelector(".address");
+  const h1 = form.querySelector("h1");
+  const btn = form.querySelector("button");
   form.dataset.id = data.id;
+  h1.innerText = `Cập nhật người dùng`;
+  btn.innerText = `Cập nhật`;
   if (nameInput) {
     nameInput.value = data.name;
   }
@@ -94,27 +155,70 @@ const submitFrom = () => {
     const nameInput = form.querySelector(".name");
     const emailInput = form.querySelector(".email");
     const addressInput = form.querySelector(".address");
+    const h1 = form.querySelector("h1");
+    const btn = form.querySelector("button");
     const name = nameInput.value;
     const email = emailInput.value;
     const address = addressInput.value;
     const id = form.dataset.id;
-
-    //Gọi API Update
-    // - id của user cần update
-    // - data cần update
-    const updateStatus = await updateUser(id, {
-      name,
-      email,
-      address,
-    });
-    if (updateStatus) {
-      //Cập nhật thành công
-      getUsers(); //Làm mới table
-      form.reset();
+    if (id) {
+      //Gọi API Update
+      // - id của user cần update
+      // - data cần update
+      const updateStatus = await updateUser(id, {
+        name,
+        email,
+        address,
+      });
+      if (updateStatus) {
+        //Cập nhật thành công
+        getUsers(); //Làm mới table
+        form.reset(); //Reset dữ liệu
+        h1.innerText = "Thêm người dùng";
+        btn.innerText = "Thêm";
+        delete form.dataset.id;
+      }
+    } else {
+      //Gọi API kiểm tra email
+      const checkEmail = await checkEmailExist(email);
+      const emailError = form.querySelector(".email-error");
+      emailError.innerText = "";
+      if (checkEmail) {
+        //Thông báo lỗi
+        emailError.innerText = "Email đã tồn tại";
+      } else {
+        //Gọi API thêm
+        const addStatus = await addUser({
+          name,
+          email,
+          address,
+        });
+        if (addStatus) {
+          getUsers();
+          form.reset();
+        }
+      }
     }
   });
 };
 submitFrom();
+
+const checkEmailExist = async (email) => {
+  const response = await fetch(`${serverApi}/users?email=${email}`);
+  const data = await response.json();
+  //Nếu mảng có phần tử ==> Email đã tồn tại
+  return data.length > 0;
+};
+const addUser = async (data) => {
+  const response = await fetch(`${serverApi}/users`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return response.ok;
+};
 
 const updateUser = async (id, data) => {
   const response = await fetch(`${serverApi}/users/${id}`, {
