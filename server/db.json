@@ -1,12 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "User 12",
-      "email": "user1@gmail.com",
-      "address": "Address 1"
-    },
-    {
       "id": 2,
       "name": "User 2",
       "email": "user2@gmail.com",
@@ -77,6 +71,12 @@
       "email": "hoangan.web@gmail.com",
       "address": "vsdv",
       "id": 13
+    },
+    {
+      "name": "Ahihi",
+      "email": "ahihi@gmail.com",
+      "address": "Hà Nội",
+      "id": 14
     }
   ]
 }
