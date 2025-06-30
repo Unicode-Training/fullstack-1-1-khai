@@ -18,15 +18,119 @@ Làm sao để bảo vệ token?
 - Hạ thời gian sống token xuống thấp --> Ảnh hưởng đến trải nghiệm
 - Giải pháp: Sinh ra token mới gọi là refreshToken --> Dùng để cấp lại accessToken mới
 */
+const root = document.querySelector("#root");
+const getToken = () => {
+  const accessToken = localStorage.getItem("accessToken");
+  const refreshToken = localStorage.getItem("refreshToken");
+  return {
+    accessToken,
+    refreshToken,
+  };
+};
+const saveToken = (token) => {
+  localStorage.setItem("accessToken", token.access_token);
+  localStorage.setItem("refreshToken", token.refresh_token);
+};
 
-const form = document.querySelector("form");
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const formData = new FormData(form);
-  const email = formData.get("email");
-  const password = formData.get("password");
-  handleLogin(email, password);
-});
+const getProfile = async () => {
+  const { accessToken } = getToken();
+  if (accessToken) {
+    const response = await fetch(
+      `https://api.escuelajs.co/api/v1/auth/profile`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    if (!response.ok) {
+      const newToken = await refreshToken();
+      if (newToken) {
+        saveToken(newToken);
+        getProfile();
+      } else {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        render();
+      }
+      return;
+    }
+    const data = await response.json();
+    if (data) {
+      const nameProfileEl = document.querySelector(".name-profile");
+      nameProfileEl.innerText = data.name;
+    }
+  }
+};
+const refreshToken = async () => {
+  const { refreshToken } = getToken();
+  if (refreshToken) {
+    const response = await fetch(
+      `https://api.escuelajs.co/api/v1/auth/refresh-token`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ refreshToken }),
+      }
+    );
+    //Kiểm tra response.ok trả về true hay false?
+    //Nếu trả về false --> Xử lý đăng xuất
+    if (!response.ok) {
+      return false;
+    }
+    const newToken = await response.json();
+    return newToken;
+  }
+};
+const render = () => {
+  const loginForm = `<form action="">
+      <div>
+        <label for="">Email</label>
+        <input type="email" name="email" placeholder="Email..." required />
+      </div>
+      <div>
+        <label for="">Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password..."
+          required
+        />
+      </div>
+      <button>Login</button>
+    </form>`;
+  const welcome = `
+  <h1>Chào mừng bạn đã quay trở lại</h1>
+  <span>Chào: <span class="name-profile"></span></span>
+  <button class="logout-btn">Đăng xuất</button>
+  `;
+  const { accessToken } = getToken();
+  if (accessToken) {
+    root.innerHTML = welcome;
+    getProfile();
+    const logoutBtn = document.querySelector(".logout-btn");
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      render();
+    });
+  } else {
+    root.innerHTML = loginForm;
+    const form = document.querySelector("form");
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const email = formData.get("email");
+        const password = formData.get("password");
+        handleLogin(email, password);
+      });
+    }
+  }
+};
+render();
 
 const handleLogin = async (email, password) => {
   const response = await fetch(`https://api.escuelajs.co/api/v1/auth/login`, {
@@ -42,9 +146,25 @@ const handleLogin = async (email, password) => {
   }
   const data = await response.json();
   saveToken(data);
+  render();
 };
 
-const saveToken = (token) => {
-  localStorage.setItem("accessToken", token.access_token);
-  localStorage.setItem("refreshToken", token.refresh_token);
-};
+//Fetch Wrapper
+// const fetchWrapper = (url, options) => {
+//   //Logic xử lý token
+//   return fetch(url, options);
+// };
+
+// fetchWrapper('abc').then(data=> {
+
+// })
+
+//Vấn đề refresh nhiều lần (Nhiều request trên 1 trang)
+/*
+- Request 1 --> token ok --> data
+- Request 2 --> token ok --> data
+- Request 4 --> Token failed --> Refresh Token --> Gọi lại Request 4 --> Data
+- Request 5 --> Token failed --> Refresh Token --> Gọi lại Request 5 --> Data
+
+--> Dùng Promise xử lý
+*/
