@@ -19,71 +19,18 @@ Làm sao để bảo vệ token?
 - Giải pháp: Sinh ra token mới gọi là refreshToken --> Dùng để cấp lại accessToken mới
 */
 const root = document.querySelector("#root");
-const getToken = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  const refreshToken = localStorage.getItem("refreshToken");
-  return {
-    accessToken,
-    refreshToken,
-  };
-};
-const saveToken = (token) => {
-  localStorage.setItem("accessToken", token.access_token);
-  localStorage.setItem("refreshToken", token.refresh_token);
-};
 
 const getProfile = async () => {
-  const { accessToken } = getToken();
-  if (accessToken) {
-    const response = await fetch(
-      `https://api.escuelajs.co/api/v1/auth/profile`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    if (!response.ok) {
-      const newToken = await refreshToken();
-      if (newToken) {
-        saveToken(newToken);
-        getProfile();
-      } else {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        render();
-      }
-      return;
-    }
-    const data = await response.json();
-    if (data) {
-      const nameProfileEl = document.querySelector(".name-profile");
-      nameProfileEl.innerText = data.name;
-    }
+  const response = await fetchWrapper(
+    `https://api.escuelajs.co/api/v1/auth/profile`
+  );
+  const data = await response.json();
+  if (data) {
+    const nameProfileEl = document.querySelector(".name-profile");
+    nameProfileEl.innerText = data.name;
   }
 };
-const refreshToken = async () => {
-  const { refreshToken } = getToken();
-  if (refreshToken) {
-    const response = await fetch(
-      `https://api.escuelajs.co/api/v1/auth/refresh-token`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ refreshToken }),
-      }
-    );
-    //Kiểm tra response.ok trả về true hay false?
-    //Nếu trả về false --> Xử lý đăng xuất
-    if (!response.ok) {
-      return false;
-    }
-    const newToken = await response.json();
-    return newToken;
-  }
-};
+
 const render = () => {
   const loginForm = `<form action="">
       <div>
@@ -133,13 +80,16 @@ const render = () => {
 render();
 
 const handleLogin = async (email, password) => {
-  const response = await fetch(`https://api.escuelajs.co/api/v1/auth/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-  });
+  const response = await fetchWrapper(
+    `https://api.escuelajs.co/api/v1/auth/login`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    }
+  );
   if (!response.ok) {
     alert("Thông tin đăng nhập không đúng");
     return;
@@ -168,3 +118,6 @@ const handleLogin = async (email, password) => {
 
 --> Dùng Promise xử lý
 */
+
+getProfile();
+getProfile();
