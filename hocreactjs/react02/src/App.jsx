@@ -1,14 +1,17 @@
 // import Counter from "./components/Counter";
 // import Input from "./components/Input";
 
-import Form from "./components/Form";
+import Users from "./components/Users";
+
+// import Form from "./components/Form";
 
 export default function App() {
   return (
     <div>
       {/* <Counter /> */}
       {/* <Input /> */}
-      <Form />
+      {/* <Form /> */}
+      <Users />
     </div>
   );
 }
