@@ -1,17 +1,25 @@
 // import Counter from "./components/Counter";
 // import Input from "./components/Input";
 
+<<<<<<< HEAD
 import Users from "./components/Users";
 
 // import Form from "./components/Form";
+=======
+import Form from "./components/Form";
+>>>>>>> 08b3f08 (Update code)
 
 export default function App() {
   return (
     <div>
       {/* <Counter /> */}
       {/* <Input /> */}
+<<<<<<< HEAD
       {/* <Form /> */}
       <Users />
+=======
+      <Form />
+>>>>>>> 08b3f08 (Update code)
     </div>
   );
 }
