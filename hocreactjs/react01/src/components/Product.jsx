@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 import "../assets/style.css";
 export default function Product({ product }) {
   return (
@@ -13,6 +16,7 @@ export default function Product({ product }) {
 //Yêu cầu: Nếu sản phẩm nào có isActive = true --> Hiển thị thêm class active
 //Nếu sản phẩm nào có attributes --> Hiển thị component Attribute vào trước button "Add To Cart"
 //Bên component Attribute: Hiển thị danh sách attribute tương ứng
+<<<<<<< Updated upstream
 =======
 import "../assets/style.css";
 export default function Product({ product }) {
@@ -29,3 +33,5 @@ export default function Product({ product }) {
 //Nếu sản phẩm nào có attributes --> Hiển thị component Attribute vào trước button "Add To Cart"
 //Bên component Attribute: Hiển thị danh sách attribute tương ứng
 >>>>>>> 08b3f08 (Update code)
+=======
+>>>>>>> Stashed changes

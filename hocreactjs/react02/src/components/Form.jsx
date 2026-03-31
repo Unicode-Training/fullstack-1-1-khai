@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 // let initialUsers = [];
@@ -115,6 +118,7 @@ export default function Form({ onSubmit, users }) {
 - B2: Xác định state để hiển thị dữ liệu lên form --> Set state đó với dữ liệu đã lấy ở bước 1
 - B3: Xử lý submit form
 */
+<<<<<<< Updated upstream
 =======
 import { useState } from "react";
 
@@ -182,3 +186,5 @@ export default function Form() {
   );
 }
 >>>>>>> 08b3f08 (Update code)
+=======
+>>>>>>> Stashed changes

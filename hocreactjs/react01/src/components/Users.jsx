@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 import React, { Fragment } from "react";
 
 export default function Users() {
@@ -55,6 +58,7 @@ export default function Users() {
 //parse: {expression}
 //Conditional Rendering
 //Array render
+<<<<<<< Updated upstream
 =======
 import React, { Fragment } from "react";
 
@@ -113,3 +117,5 @@ export default function Users() {
 //Conditional Rendering
 //Array render
 >>>>>>> 08b3f08 (Update code)
+=======
+>>>>>>> Stashed changes

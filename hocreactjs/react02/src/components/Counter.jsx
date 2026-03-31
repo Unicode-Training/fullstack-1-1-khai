@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 import { useState } from "react";
 
 export default function Counter() {
@@ -22,6 +25,7 @@ export default function Counter() {
     </div>
   );
 }
+<<<<<<< Updated upstream
 =======
 import { useState } from "react";
 
@@ -47,3 +51,5 @@ export default function Counter() {
   );
 }
 >>>>>>> 08b3f08 (Update code)
+=======
+>>>>>>> Stashed changes

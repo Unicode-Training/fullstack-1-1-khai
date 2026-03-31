@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 export default function Button({ onClick }) {
   //   const handleClick = () => {
   //     console.log("Click me 2");
@@ -10,6 +13,7 @@ export default function Button({ onClick }) {
     </div>
   );
 }
+<<<<<<< Updated upstream
 =======
 export default function Button({ onClick }) {
   //   const handleClick = () => {
@@ -23,3 +27,5 @@ export default function Button({ onClick }) {
   );
 }
 >>>>>>> 08b3f08 (Update code)
+=======
+>>>>>>> Stashed changes

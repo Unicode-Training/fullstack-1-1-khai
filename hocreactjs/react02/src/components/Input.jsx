@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 import { useState } from "react";
 
 export default function Input() {
@@ -15,6 +18,7 @@ export default function Input() {
     </div>
   );
 }
+<<<<<<< Updated upstream
 =======
 import { useState } from "react";
 
@@ -33,3 +37,5 @@ export default function Input() {
   );
 }
 >>>>>>> 08b3f08 (Update code)
+=======
+>>>>>>> Stashed changes

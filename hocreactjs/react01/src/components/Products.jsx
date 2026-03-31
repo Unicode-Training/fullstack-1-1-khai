@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 import React from "react";
 import Product from "./Product";
 
@@ -36,6 +39,7 @@ export default function Products() {
     </div>
   );
 }
+<<<<<<< Updated upstream
 =======
 import React from "react";
 import Product from "./Product";
@@ -75,3 +79,5 @@ export default function Products() {
   );
 }
 >>>>>>> 08b3f08 (Update code)
+=======
+>>>>>>> Stashed changes
