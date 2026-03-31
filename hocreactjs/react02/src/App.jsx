@@ -1,17 +1,36 @@
 // import Counter from "./components/Counter";
 // import Input from "./components/Input";
 
+<<<<<<< Updated upstream
+<<<<<<< HEAD
 import Users from "./components/Users";
 
 // import Form from "./components/Form";
+=======
+import Form from "./components/Form";
+>>>>>>> 08b3f08 (Update code)
+=======
+import Users from "./components/Users";
+
+// import Form from "./components/Form";
+>>>>>>> Stashed changes
 
 export default function App() {
   return (
     <div>
       {/* <Counter /> */}
       {/* <Input /> */}
+<<<<<<< Updated upstream
+<<<<<<< HEAD
       {/* <Form /> */}
       <Users />
+=======
+      <Form />
+>>>>>>> 08b3f08 (Update code)
+=======
+      {/* <Form /> */}
+      <Users />
+>>>>>>> Stashed changes
     </div>
   );
 }

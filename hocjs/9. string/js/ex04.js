@@ -1,5 +1,7 @@
 let content = `<h2>Học lập trình JS không khó. Học lập trình JS không khó. Học lập trình JS không khó. Học lập trình JS không khó</h2>`;
-let keyword = "LẬP trìnH";
+console.log(content);
+
+let keyword = "js";
 
 let position = content.toLowerCase().indexOf(keyword.toLowerCase());
 
@@ -23,6 +25,7 @@ while (position !== -1) {
   content = content.slice(position + keyword.length);
   position = content.toLowerCase().indexOf(keyword.toLowerCase());
 }
+console.log(newContent + content);
 
 //Hiển thị lên giao diện
 document.body.innerHTML = newContent + content;
