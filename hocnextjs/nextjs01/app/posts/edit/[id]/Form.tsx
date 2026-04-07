@@ -1,5 +1,5 @@
 "use client";
-import { clearCachePath } from "@/utils/cache";
+import { clearCache } from "@/utils/cache";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, SubmitEvent, useState } from "react";
 type Props = {
@@ -22,8 +22,8 @@ export default function Form({ post }: Props) {
     });
     if (response.ok) {
       //Cập nhật thành công
-      await clearCachePath(`/posts`); //Xóa cache của trang list
-      await clearCachePath(`/posts/edit/${post.id}`); //Xóa cache của trang edit
+      clearCache("posts", "tag");
+      clearCache(`post:${post.id}`, "tag");
       router.push(`/posts`);
     } else {
       //Cập nhật thất bại

@@ -5,6 +5,9 @@ type Props = {
 const getPost = async (id: number) => {
   const response = await fetch(`http://localhost:3001/posts/${id}`, {
     cache: "force-cache",
+    next: {
+      tags: [`post:${id}`],
+    },
   });
   return response.json();
 };
@@ -20,3 +23,4 @@ export default async function EditPostPage({ params }: Props) {
 }
 
 //Cache tags
+//use cache --> Áp dụng trong các trường hợp code back-end trực tiếp trên Next

@@ -1,7 +1,7 @@
 //Tên hàm tương ứng với tên của các http method
 //GET, POST, PUT, PATCH, DELETE
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 // export const GET = (request: NextRequest) => {
@@ -25,18 +25,26 @@ import { NextRequest, NextResponse } from "next/server";
 
 //Xóa cache
 export const DELETE = async (request: NextRequest) => {
-  const { path } = await request.json();
-  if (!path) {
+  const { value, type } = await request.json(); //type: path, tag
+  if (!value || !type) {
     return NextResponse.json(
       {
-        message: "Path is required",
+        message: "Value and type is required",
       },
       {
         status: 400,
       },
     );
   }
-  revalidatePath(path);
+  if (type === "path") {
+    revalidatePath(value);
+  }
+  if (type === "tag") {
+    revalidateTag(value, {
+      expire: 0, //Xóa ngay lập tức
+    });
+  }
+
   return NextResponse.json({
     message: "Clear cache success",
   });

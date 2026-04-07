@@ -1,6 +1,6 @@
 "use client";
 
-import { clearCachePath } from "@/utils/cache";
+import { clearCache } from "@/utils/cache";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -15,7 +15,7 @@ export default function DeleteButton({ id }: Props) {
       method: "DELETE",
     });
     if (response.ok) {
-      await clearCachePath(`/posts`);
+      await clearCache("posts", "tag");
       router.refresh();
     }
   };

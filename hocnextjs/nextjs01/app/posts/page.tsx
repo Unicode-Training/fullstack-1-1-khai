@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { headers } from "next/headers";
 import DeleteButton from "./DeleteButton";
 
 type Post = {
@@ -8,17 +9,23 @@ type Post = {
 const getPosts = async (): Promise<Post[]> => {
   const response = await fetch(`http://localhost:3001/posts`, {
     cache: "force-cache",
-    // next: {
-    //   revalidate: 60,
-    // },
+    next: {
+      tags: ["posts"],
+    },
   });
   return response.json();
 };
 export default async function PostsPage() {
   const posts = await getPosts();
+  const allHeaders = await headers();
+  const isAuth = allHeaders.get("x-auth");
+
   return (
     <div>
-      <h1 className="text-3xl">Posts</h1>
+      <h1 className="text-3xl">
+        Posts: {isAuth === "true" ? "Đã đăng nhập" : "Chưa đăng nhập"}
+      </h1>
+
       {posts.map((post) => (
         <h2 className="text-xl flex gap-3" key={post.id}>
           {post.title}

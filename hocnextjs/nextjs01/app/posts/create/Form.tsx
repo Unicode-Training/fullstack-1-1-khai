@@ -1,7 +1,8 @@
 "use client";
-import { clearCachePath } from "@/utils/cache";
+import { clearCache } from "@/utils/cache";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, SubmitEvent, useState } from "react";
+import { ChangeEvent, SubmitEvent, useEffect, useState } from "react";
+import { getAuthStatus } from "../action";
 
 export default function Form() {
   const [title, setTitle] = useState<string>("");
@@ -17,12 +18,19 @@ export default function Form() {
     });
     if (response.ok) {
       //Thêm thành công
-      await clearCachePath(`/posts`);
+      await clearCache("posts", "tag");
       router.push(`/posts`);
     } else {
       //Thêm thất bại
     }
   };
+  useEffect(() => {
+    const getAuth = async () => {
+      const isAuth = await getAuthStatus();
+      console.log(isAuth);
+    };
+    getAuth();
+  }, []);
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
