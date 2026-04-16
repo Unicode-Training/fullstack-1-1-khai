@@ -1,24 +1,23 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { getAccessToken } from "../_actions/auth.action";
-import { useState } from "react";
+import { use, useState } from "react";
+import { MainContext } from "./MainProvider";
+import { deleteCart, getCartCount } from "../services/cart.service";
 
 export default function DeleteCartItem({ productId }: { productId: string }) {
   const router = useRouter();
   const [isLoading, setLoading] = useState(false);
+  const { setCart } = use(MainContext);
   const handleRemove = async () => {
-    const accessToken = await getAccessToken();
     setLoading(true);
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_API}/shopping-cart/${productId}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-    );
+    const response = await deleteCart(productId);
+    if (response) {
+      const quantity = await getCartCount();
+      if (quantity) {
+        setCart(quantity);
+      }
+    }
     setLoading(false);
     router.refresh();
   };

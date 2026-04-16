@@ -1,5 +1,5 @@
-import { getAccessToken } from "../_actions/auth.action";
 import DeleteCartItem from "../_components/DeleteCartItem";
+import { fetchWrapper } from "../utils/fetch";
 
 const getShoppingCart = async (): Promise<{
   items: {
@@ -11,17 +11,15 @@ const getShoppingCart = async (): Promise<{
   }[];
   total: number;
 }> => {
-  const accessToken = await getAccessToken();
-  const response = await fetch(`${process.env.SERVER_API}/shopping-cart`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const response = await fetchWrapper(
+    `${process.env.SERVER_API}/shopping-cart`,
+  );
   const data = await response.json();
   return data;
 };
 export default async function CartPage() {
   const { items, total } = await getShoppingCart();
+
   return (
     <div>
       <h1 className="text-3xl mb-3">Shopping Cart</h1>

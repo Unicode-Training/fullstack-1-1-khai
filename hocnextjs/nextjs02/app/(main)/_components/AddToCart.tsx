@@ -1,6 +1,9 @@
 "use client";
 
-import { getAccessToken } from "../_actions/auth.action";
+import { toast } from "sonner";
+import { use, useState } from "react";
+import { MainContext } from "./MainProvider";
+import { addToCart, getCartCount } from "../services/cart.service";
 
 type Props = {
   product: {
@@ -8,35 +11,30 @@ type Props = {
   };
 };
 export default function AddToCart({ product }: Props) {
+  const { setCart } = use(MainContext);
+  const [isLoading, setLoading] = useState(false);
   const handleAddToCart = async () => {
-    console.log("add");
-    //Lấy accessToken
-    const accessToken = await getAccessToken(); //Nhờ server action lấy
-
-    //Gọi api add to cart
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_API}/shopping-cart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({
-          productId: product._id,
-          quantity: 1,
-        }),
-      },
-    );
-    const data = await response.json();
-    console.log(data);
+    setLoading(true);
+    const response = await addToCart({
+      productId: product._id,
+      quantity: 1,
+    });
+    setLoading(false);
+    if (response) {
+      toast.success(`Add to cart success`);
+      //Tính toán lại số lượng
+      const quantity = await getCartCount();
+      if (quantity) {
+        setCart(quantity);
+      }
+    }
   };
   return (
     <button
       className="px-3 py-1 bg-amber-700 text-white rounded-md"
       onClick={handleAddToCart}
     >
-      Add to card
+      {isLoading ? "Loading..." : "Add to card"}
     </button>
   );
 }

@@ -1,30 +1,28 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { getCurrentUser, logout } from "../_actions/auth.action";
+import { use, useEffect, useState } from "react";
+import { logout } from "../_actions/auth.action";
 import { usePathname } from "next/navigation";
+import { MainContext } from "./MainProvider";
+import { getUser } from "../services/auth.service";
 
 export default function Header() {
   const [user, setUser] = useState({} as { fullName: string });
   const [isAuthenticated, setAuthenticated] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const pathname = usePathname();
+  const { cart } = use(MainContext);
   useEffect(() => {
-    //Gọi lên next server (server action)
     const refetchUser = async () => {
-      try {
-        const user = await getCurrentUser();
-        if (!user) {
-          throw new Error("Unauthorize");
-        }
+      const user = await getUser();
+      if (user) {
         setUser(user);
         setAuthenticated(true);
-      } catch {
+      } else {
         setAuthenticated(false);
         setUser({} as { fullName: string });
-      } finally {
-        setLoading(false);
       }
+      setLoading(false);
     };
     refetchUser();
   }, [pathname]);
@@ -44,6 +42,9 @@ export default function Header() {
         </li>
         <li>
           <Link href={"/products"}>Products</Link>
+        </li>
+        <li>
+          <Link href={"/cart"}>Cart ({cart})</Link>
         </li>
         {isLoading ? (
           <li>Loading...</li>

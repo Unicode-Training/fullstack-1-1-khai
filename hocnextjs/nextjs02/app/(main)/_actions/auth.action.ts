@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { fetchWrapper } from "../utils/fetch";
 
 export const loginAction = async (formData: FormData) => {
   const email = formData.get("email");
@@ -27,17 +28,7 @@ export const loginAction = async (formData: FormData) => {
 };
 
 export const getCurrentUser = async () => {
-  //Lấy token
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
-  if (!accessToken) {
-    return;
-  }
-  const response = await fetch(`${process.env.SERVER_API}/profile/me`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const response = await fetchWrapper(`${process.env.SERVER_API}/profile/me`);
   const data = await response.json();
   return data.user;
 };
@@ -64,4 +55,36 @@ export const getAccessToken = async () => {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("accessToken")?.value;
   return accessToken;
+};
+
+export const makeRefreshToken = async () => {
+  const cookieStore = await cookies();
+  const refreshToken = cookieStore.get("refreshToken")?.value;
+  if (!refreshToken) {
+    return false;
+  }
+  const response = await fetch(`${process.env.SERVER_API}/auth/refresh`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ refreshToken }),
+  });
+
+  if (!response.ok) {
+    return false;
+  }
+  const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
+    await response.json();
+  cookieStore.set(`accessToken`, newAccessToken, {
+    httpOnly: true,
+    maxAge: 3600,
+  });
+  cookieStore.set(`refreshToken`, newRefreshToken, {
+    httpOnly: true,
+    maxAge: 3600,
+  });
+  return {
+    newAccessToken,
+  };
 };
