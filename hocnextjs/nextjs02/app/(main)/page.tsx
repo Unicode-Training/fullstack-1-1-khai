@@ -1,3 +1,8 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Trang chủ - Unicode Training",
+};
 export default function page() {
   return (
     <div>

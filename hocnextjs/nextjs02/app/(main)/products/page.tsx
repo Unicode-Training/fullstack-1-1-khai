@@ -1,6 +1,10 @@
 import Image from "next/image";
 import AddToCart from "../_components/AddToCart";
-
+import Link from "next/link";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Sản phẩm - Unicode Training",
+};
 const getProducts = async (): Promise<
   {
     _id: string;
@@ -30,7 +34,9 @@ export default async function ProductsPage() {
                   height={300}
                   className="h-50 object-cover"
                 />
-                <h2 className="text-xl font-medium mt-2">{product.name}</h2>
+                <h2 className="text-xl font-medium mt-2">
+                  <Link href={`/products/${product._id}`}>{product.name}</Link>
+                </h2>
                 <p className="py-3 text-md font-semibold">{product.price} đ</p>
                 <AddToCart product={product} />
               </div>

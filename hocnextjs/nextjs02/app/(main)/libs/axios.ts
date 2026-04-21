@@ -15,7 +15,9 @@ axiosInstance.interceptors.request.use(async (config) => {
   }
   return config;
 });
-let refreshTokenPromise: null | Promise<boolean | undefined> = null;
+let refreshTokenPromise: null | Promise<
+  boolean | undefined | { newAccessToken: string }
+> = null;
 //Interceptor response --> Xử lý refresh token khi request bị status code = 401
 axiosInstance.interceptors.response.use(
   (response) => response,
@@ -33,8 +35,7 @@ axiosInstance.interceptors.response.use(
         //retry
         return axiosInstance(error.config);
       } else {
-        // return await logout();
-        return;
+        return Promise.reject(error);
       }
     }
     return Promise.reject(error);
