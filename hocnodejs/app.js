@@ -57,7 +57,7 @@
 // fs.rmdirSync('./data');
 
 //Scan folder
-import fs from "fs";
+// import fs from "fs";
 // const list = fs.readdirSync('./data');
 // list.forEach(item => {
 //     const path = `./data/${item}`;
@@ -139,3 +139,127 @@ import fs from "fs";
 // }
 
 // createFile(`./data/sub1/sub2/admin/HomeController.ts`);
+
+//url: Bóc tách từng thành phần của url để tiện cho quá trình xử lý
+// import url from "url";
+// const urlString = 'https://unicode.vn:8080/khoa-hoc?q=abc&status=active';
+// const urlParse = url.parse(urlString, true);
+// console.log(urlParse);
+// console.log(urlParse.pathname);
+// console.log(urlParse.query.status);
+
+//path: Xử lý đường dẫn trong hệ thống tệp
+// import path from "path";
+// console.log(path);
+
+// const pathString = "/uploads/products/image.jpg";
+// const pathParse = path.parse(pathString);
+// console.log(pathParse);
+// console.log(path.extname(pathString));
+// console.log(path.basename(pathString));
+
+//Nối path
+// const pathData = path.join('data', 'data.txt'); //data/data.txt
+// console.log(pathData);
+
+// const pathData = path.resolve('data', 'data.txt');
+// console.log(pathData);
+
+// import "./modules/home.js";
+
+//Module cypto
+// import crypto from "crypto";
+// - Tạo UUID
+// - Tạo số nguyên ngẫu nhiên
+// - Mã hóa md5
+// - Mã hóa sha1
+// console.log(crypto.randomUUID());
+// console.log(crypto.randomInt(100000, 999999));
+// console.log(crypto.createHash('md5').update('123456').digest('hex'));
+// console.log(crypto.createHash('sha1').update('123456').digest('hex'));
+// const randomNumber = crypto.randomInt(100000, 999999).toString();
+// const activeToken = crypto.createHash('md5').update(randomNumber).digest('hex');
+// console.log(activeToken);
+
+//Module http
+import http from "http";
+import url from "url";
+const PORT = 3000;
+const server = http.createServer((req, res) => {
+    const urlParse = url.parse(req.url, true);
+    const pathname = urlParse.pathname;
+    const method = req.method;
+    const apiKey = req.headers['x-api-key'];
+
+    if (pathname === '/api/users') {
+        const users = [
+            {
+                id: 1,
+                name: "User 1"
+            },
+            {
+                id: 2,
+                name: "User 2"
+            },
+            {
+                id: 3,
+                name: "User 3"
+            }
+        ]
+        res.setHeader('x-abc', 123);
+        res.setHeader('Content-Type', 'application/json; charset=utf-8')
+        return res.end(JSON.stringify(users))
+    }
+
+    if (pathname === '/api/products') {
+        return res.end('Danh sách sản phẩm')
+    }
+
+    if (pathname === '/google/redirect') {
+        //Xử lý logic
+        //Chuyển hướng sang google
+        const googleUrl = 'https://google.com';
+        res.statusCode = 301;
+        res.setHeader("Location", googleUrl);
+        return res.end('');
+    }
+
+    if (pathname === "/api/auth/login") {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:1234')
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        console.log(`Request tới login`);
+
+        return res.end(JSON.stringify({
+            success: true,
+            message: "Login success"
+        }));
+    }
+
+    res.statusCode = 404;
+    return res.end('Không tìm thấy');
+});
+server.listen(PORT, () => {
+    console.log(`Running: http://localhost:${PORT}`);
+});
+
+//Request
+// - url
+// - method
+// - headers
+// - body
+
+//Response
+// - status: 
+// + success: 200, 201 (Created)
+// + redirect: 301, 302
+// + client error: 400 (Validate), 401 (Xác thực thất bại), 403 (Không có quyền), 404 (Không tìm thấy), 429 (Số lượng request nhiều quá)
+// + server error: 500 (Lỗi chung)
+
+// - headers
+// - message
+
+//Nguyên tắc chuyển hướng (Redirect)
+// - Do trình duyệt
+// - Server trả về status là 301, 302
+// - Server trả về header: Location: duong-dan-can-chuyen-huong
