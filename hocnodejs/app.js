@@ -223,12 +223,24 @@ const server = http.createServer((req, res) => {
         res.setHeader("Location", googleUrl);
         return res.end('');
     }
-
+    const origins = [
+        'http://localhost:1234',
+        'https://unicode.vn'
+    ]
     if (pathname === "/api/auth/login") {
+        const requestOrigin = req.headers.origin;
+
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
-        res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:1234')
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-        console.log(`Request tới login`);
+        if (origins.includes(requestOrigin)) {
+            res.setHeader('Access-Control-Allow-Origin', requestOrigin)
+        }
+
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type,x-api-key');
+        res.setHeader('Access-Control-Allow-Methods', 'PUT,PATCH,DELETE');
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+        console.log(`Request tới login`, req.method);
+        console.log(`Cookie:`, req.headers['cookie']);
+
 
         return res.end(JSON.stringify({
             success: true,
