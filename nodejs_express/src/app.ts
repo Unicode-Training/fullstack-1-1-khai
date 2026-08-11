@@ -1,45 +1,27 @@
-import express, { Request, Response } from "express";
+import express from "express";
+import indexRouter from "./routes/index.route.js";
+import { loggerMiddleware } from "./middlewares/logger.middleware.js";
+import { demoMiddleware } from "./middlewares/demo.middleware.js";
+import { errorMiddleware, notFoundMiddleware } from "./middlewares/error.middleware.js";
 const PORT = 3000;
 const app = express();
 
 //Config middleware
 app.use(express.json());
 
-//Routing
-app.get('/', (req: Request, res: Response) => {
-    res.json({
-        message: "Hello Express"
-    })
-});
+//Global middleware
+app.use(loggerMiddleware);
+app.use(demoMiddleware);
 
-app.get('/api/users', (req: Request, res: Response) => {
-    // const { q, status } = req.query;
-    // console.log(q);
-    // console.log(status);
-    // const apiKey = req.headers['x-api-key'];
-    // const apiKey = req.get('x-api-key')
-    // console.log(apiKey);
+app.use(indexRouter);
 
-    res.json({
-        message: "Get list users",
+//Route không khớp chạy tiếp xuống dưới
 
-    })
-});
+//Not Found Handling
+app.use(notFoundMiddleware);
 
-app.get('/api/users/:id', (req: Request, res: Response) => {
-    const id = req.params.id
-    res.json({
-        message: `Get user detail: ${id}`
-    })
-});
-
-app.post('/api/users', (req: Request, res: Response) => {
-    console.log(req.body);
-
-    res.json({
-        message: "Create user"
-    })
-});
+//Error Handling
+app.use(errorMiddleware);
 
 app.listen(PORT, () => {
     console.log(`Đang chạy với PORT: ${PORT}`);
