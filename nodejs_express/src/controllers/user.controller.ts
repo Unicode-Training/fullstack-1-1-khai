@@ -26,12 +26,19 @@ export const userController = {
         })
     },
 
-    create(req: Request, res: Response) {
+    async create(req: Request, res: Response) {
+        // console.log(req.body.createdAt);
+        console.log(req.body.name);
 
-        res.json({
+        // const now = new Date(req.body.createdAt);
+        // now.setMonth(8);
+        // console.log(now);
+        return res.json({
             success: true,
-            message: "Create user success"
+            message: "Create user success",
+            data: req.body
         });
+
     },
     demoRedirect(req: Request, res: Response) {
         return res.redirect('https://google.com');
