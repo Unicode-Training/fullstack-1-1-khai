@@ -6,9 +6,16 @@ import { ProductFilter } from "../types/product.type.js";
 
 export const productController = {
     async findAll(req: Request, res: Response) {
-        const products = await productService.findAll(req.query as ProductFilter);
+        const data = await productService.findAll(req.query as unknown as ProductFilter);
+        if (!data) {
+            return;
+        }
+        const { products, count } = data;
         return res.json({
-            data: products
+            data: products,
+            meta: {
+                total: count
+            }
         })
     },
     async find(req: Request, res: Response) {
