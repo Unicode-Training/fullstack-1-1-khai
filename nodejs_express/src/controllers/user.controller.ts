@@ -1,47 +1,32 @@
 import { Request, Response } from "express";
 import { userService } from "../services/user.service.js";
-// import stringify from "safe-stable-stringify";
+
 export const userController = {
-    findAll(req: Request, res: Response) {
-        //Service
-        const data = userService.findAll();
+    async findAll(req: Request, res: Response) {
+        const users = await userService.findAll(req.query as { phone: string });
         return res.json({
-            data
-        })
-        // res.header('x-api-key', '123');
-        // res.set('x-abc', "ahihi");
-        // const user = {
-        //     id: 12n, //BigInt
-        //     name: "An"
-        // }
-        // return res.header("Content-Type", "application/json").send(stringify(user));
-    },
-
-    find(req: Request, res: Response) {
-        const { id } = req.params;
-        const data = userService.find(+id!);
-        return res.json({
-            message: "Get user detail success",
-            data,
-        })
-    },
-
-    async create(req: Request, res: Response) {
-        // console.log(req.body.createdAt);
-        console.log(req.body.name);
-
-        // const now = new Date(req.body.createdAt);
-        // now.setMonth(8);
-        // console.log(now);
-        return res.json({
-            success: true,
-            message: "Create user success",
-            data: req.body
+            data: users
         });
-
     },
-    demoRedirect(req: Request, res: Response) {
-        return res.redirect('https://google.com');
+    async create(req: Request, res: Response) {
+        const user = await userService.create(req.body);
+        return res.json({
+            data: user
+        });
+    },
+    async update(req: Request, res: Response) {
+        const { id } = req.params;
+        const user = await userService.update(req.body, +id!);
+        return res.json({
+            data: user
+        });
+    },
+    async delete(req: Request, res: Response) {
+        const { id } = req.params;
+        const user = await userService.delete(+id!);
+        return res.json({
+            data: user
+        });
     }
 }
 

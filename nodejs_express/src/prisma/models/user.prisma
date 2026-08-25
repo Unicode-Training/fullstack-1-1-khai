@@ -3,9 +3,10 @@ model User {
   email     String   @unique
   name      String
   status    Boolean
-  createdAt DateTime
-  updatedAt DateTime
+  phone     Phone?
   password  String?
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @default(now()) @db.Timestamp
 
   @@map("users")
 }

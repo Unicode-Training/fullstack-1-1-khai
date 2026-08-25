@@ -56,6 +56,9 @@ export const productService = {
                     skip,
                     orderBy: {
                         [sort]: order
+                    },
+                    include: {
+                        images: true
                     }
                 }),
                 prisma.product.count({
