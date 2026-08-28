@@ -1,0 +1,10 @@
+model Course {
+    id          Int          @id @default(autoincrement())
+    name        String
+    price       Int          @default(0)
+    userCourses UserCourse[]
+    createdAt   DateTime     @default(now()) @db.Timestamp
+    updatedAt   DateTime     @default(now()) @db.Timestamp
+
+    @@map("courses")
+}

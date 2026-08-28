@@ -51,9 +51,11 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Course: 'Course',
   Phone: 'Phone',
   ProductImage: 'ProductImage',
   Product: 'Product',
+  UserCourse: 'UserCourse',
   User: 'User'
 } as const
 
@@ -71,6 +73,17 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const CourseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
 
 
 export const PhoneScalarFieldEnum = {
@@ -108,6 +121,17 @@ export const ProductScalarFieldEnum = {
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
 
 
+export const UserCourseScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  courseId: 'courseId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserCourseScalarFieldEnum = (typeof UserCourseScalarFieldEnum)[keyof typeof UserCourseScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
@@ -127,6 +151,13 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const CourseOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type CourseOrderByRelevanceFieldEnum = (typeof CourseOrderByRelevanceFieldEnum)[keyof typeof CourseOrderByRelevanceFieldEnum]
 
 
 export const PhoneOrderByRelevanceFieldEnum = {

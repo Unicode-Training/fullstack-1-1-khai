@@ -16,7 +16,9 @@
   "type": "module",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^26.1.2",
     "concurrently": "^10.0.4",
     "eslint": "^10.8.0",
@@ -30,8 +32,10 @@
   "dependencies": {
     "@prisma/adapter-mariadb": "^7.9.1",
     "@prisma/client": "^7.9.1",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
     "safe-stable-stringify": "^2.5.0",
     "zod": "^4.4.3"
   }

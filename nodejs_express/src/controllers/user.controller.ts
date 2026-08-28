@@ -27,6 +27,30 @@ export const userController = {
         return res.json({
             data: user
         });
+    },
+    async addCourse(req: Request, res: Response) {
+        const { id } = req.params;
+        const data = await userService.addCourse(+id!, req.body);
+        return res.json({
+            data,
+            success: true
+        })
+    },
+    async getCourses(req: Request, res: Response) {
+        const { id } = req.params;
+        const data = await userService.getCourses(+id!);
+        return res.json({
+            data,
+            success: true
+        })
+    },
+    async deleteCourses(req: Request, res: Response) {
+        const { id } = req.params;
+        const data = await userService.deleteCourses(+id!, req.body);
+        return res.json({
+            data,
+            success: true
+        })
     }
 }
 
@@ -46,3 +70,7 @@ export const userController = {
 // - status(): Setup http response code
 // - header(key, value)
 // - redirect(url)
+
+//Yêu cầu: Xây dựng endpoint xóa khóa học khỏi user
+//DELETE /users/:id/courses
+//BODY: [1]

@@ -1,4 +1,5 @@
 import { prisma } from "../lib/prisma.js";
+import { Course } from "../prisma/generated/prisma/client.js";
 
 // import fs from "fs";
 type UserData = {
@@ -94,5 +95,49 @@ export const userService = {
             })
         ]);
         return user;
+    },
+
+    async addCourse(userId: number, courseIds: number[]) {
+        return prisma.userCourse.createMany({
+            data: courseIds.map(courseId => ({
+                userId,
+                courseId
+            }))
+        });
+    },
+
+    async getCourses(userId: number) {
+        const userData = await prisma.user.findUnique({
+            where: {
+                id: userId
+            },
+            include: {
+                userCourses: {
+                    include: {
+                        course: true
+                    }
+                }
+            }
+        });
+        if (!userData) {
+            return;
+        }
+        const { userCourses, ...user } = userData;
+        return {
+            ...user,
+            courses: userCourses.map(({ course }: { course: Course }) => ({
+                ...course
+            }))
+        }
+    },
+    async deleteCourses(userId: number, courseIds: number[]) {
+        return prisma.userCourse.deleteMany({
+            where: {
+                userId,
+                courseId: {
+                    in: courseIds
+                }
+            }
+        })
     }
 }
