@@ -1,3 +1,4 @@
+import { HttpException } from "../exceptions/http.exception.js";
 import { prisma } from "../lib/prisma.js";
 import { Course } from "../prisma/generated/prisma/client.js";
 
@@ -33,6 +34,18 @@ export const userService = {
                 phone: true
             }
         });
+    },
+    async find(id: number) {
+        const user = await prisma.user.findUnique({
+            where: { id },
+            omit: {
+                password: true
+            }
+        });
+        if (!user) {
+            throw new HttpException("User not found", 404);
+        }
+        return user;
     },
     create({ phone, ...userData }: UserData) {
         return prisma.user.create({

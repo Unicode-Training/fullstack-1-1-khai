@@ -35,5 +35,8 @@ router.post('/courses', authMiddleware, courseController.create);
 //Auth
 router.post('/auth/register', authController.register);
 router.post('/auth/login', authController.login);
+router.get('/auth/profile', authMiddleware, authController.profile);
+router.delete('/auth/logout', authMiddleware, authController.logout);
+router.post('/auth/refresh-token', authController.refreshToken);
 
 export default router;
