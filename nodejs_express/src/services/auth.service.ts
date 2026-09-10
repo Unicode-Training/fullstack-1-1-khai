@@ -5,6 +5,8 @@ import { LoginData, RegisterData } from "../types/auth.type.js";
 import { hashPassword, verifyPassword } from "../utils/hash.js";
 import { redis } from "../utils/ioredis.js";
 import { decodeToken, generateToken, verifyRefreshToken } from "../utils/jwt.js";
+import { sendMailWithTemplate } from "../utils/mailer.js";
+import { generateOTP } from "../utils/otp.js";
 
 export const authService = {
     async register(registeData: RegisterData) {
@@ -37,18 +39,35 @@ export const authService = {
         //Đổi ra ttl
         const ttlRefreshToken = Math.ceil(expRefreshToken! - Date.now() / 1000);
 
+        //Lấy exp của accessToken -> Lưu redis -> Phục vụ cho việc thu hồi khi refreshToken
+        const { exp: expAccessToken } = decodeToken(token.accessToken) as JwtPayload;
+
         //Key redis
         const refreshTokenKey = `refreshToken:${user.id}:${jti}`; //Mục tiêu: Thu hồi tất cả refresh của user cụ thể
 
         //Store redis
-        await redis.setex(refreshTokenKey, ttlRefreshToken, "true");
+        await redis.setex(refreshTokenKey, ttlRefreshToken, JSON.stringify({
+            expAccessToken
+        }));
+
+        //Gửi email thông báo
+        const subject = `Cảnh báo đăng nhập tài khoản ${user.email}`;
+
+        sendMailWithTemplate(user.email, subject, 'notify-login', {
+            name: user.name,
+            email: user.email,
+            now: new Date().toLocaleString()
+        })
 
         return token;
     },
-    async logout(jti: string, exp: number) {
+    async logout(jti: string, exp: number, userId: number) {
         const key = `blacklist:${jti}`;
         const ttl = Math.ceil(exp - Date.now() / 1000);
         await redis.setex(key, ttl, "true");
+
+        //Thu hồi refreshToken?
+        await redis.del(`refreshToken:${userId}:${jti}`)
     },
     async refreshToken(token: string) {
         //Verify token
@@ -87,7 +106,49 @@ export const authService = {
         //Thu hồi refreshToken cũ
         await redis.del(refreshTokenKey);
 
+        //Thêm accessToken cũ vào blacklist
+        const { expAccessToken } = JSON.parse(refreshTokenOnRedis);
+        const ttlAccessToken = Math.ceil(expAccessToken - Date.now() / 1000);
+        await redis.setex(`blacklist:${decoded.jti}`, ttlAccessToken, 'true');
+
         return newToken;
+    },
+
+    async forgotPassword(email: string) {
+        const user = await prisma.user.findUnique({
+            where: { email }
+        });
+        if (!user) {
+            throw new HttpException("Email không tồn tại", 404);
+        }
+
+        const otp = generateOTP();
+
+        await redis.setex(`otp:${otp}`, 300, JSON.stringify({
+            id: user.id
+        }));
+
+        const subject = `Mã OTP đặt lại mật khẩu`
+        sendMailWithTemplate(user.email, subject, `forgot-password`, {
+            name: user.name,
+            otp
+        })
+    },
+
+    async resetPassword(otp: string, password: string) {
+        //Check otp có tồn tại trên redis hay không?
+        const otpOnRedis = await redis.get(`otp:${otp}`);
+        if (!otpOnRedis) {
+            throw new HttpException("OTP không hợp lệ", 401);
+        }
+        const { id } = JSON.parse(otpOnRedis);
+        await prisma.user.update({
+            where: { id },
+            data: {
+                password: hashPassword(password)
+            }
+        });
+        await redis.del(`otp:${otp}`);
     }
 }
 
@@ -112,3 +173,8 @@ export const authService = {
 // + B2: Kiểm tra refresh token có tồn tại trên redis không? (Nếu không tồn tại -> Nó đã bị thu hồi -> Từ chối)
 // + B3: Tạo accessToken mới, refreshToken mới
 // + B4: Thu hồi refreshToken cũ, thêm accessToken cũ vào blacklist
+
+//Kịch bản thêm accessToken vào blacklist khi refreshToken
+// - Dấu hiệu chung: JTI cũ
+// - Cần lấy được expired của accessToken cũ?
+

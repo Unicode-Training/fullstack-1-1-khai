@@ -38,5 +38,7 @@ router.post('/auth/login', authController.login);
 router.get('/auth/profile', authMiddleware, authController.profile);
 router.delete('/auth/logout', authMiddleware, authController.logout);
 router.post('/auth/refresh-token', authController.refreshToken);
+router.post('/auth/forgot-password', authController.forgotPassword);
+router.put('/auth/reset-password', authController.resetPassword);
 
 export default router;
