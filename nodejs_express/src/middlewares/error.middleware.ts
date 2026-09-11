@@ -10,6 +10,7 @@ export const notFoundMiddleware = (req: Request, res: Response, next: NextFuncti
 
 //Error handling
 export const errorMiddleware = (err: ErrorWithStatus, req: Request, res: Response, next: NextFunction) => {
+    console.log(err.message);
     return res.status(err.status || 500).json({
         message: err.message || "Server Error"
     });

@@ -47,6 +47,11 @@ export { Prisma }
  */
 export type Course = Prisma.CourseModel
 /**
+ * Model Fibonacci
+ * 
+ */
+export type Fibonacci = Prisma.FibonacciModel
+/**
  * Model Phone
  * 
  */

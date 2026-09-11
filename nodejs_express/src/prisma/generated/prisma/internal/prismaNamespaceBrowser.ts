@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Course: 'Course',
+  Fibonacci: 'Fibonacci',
   Phone: 'Phone',
   ProductImage: 'ProductImage',
   Product: 'Product',
@@ -84,6 +85,17 @@ export const CourseScalarFieldEnum = {
 } as const
 
 export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
+
+
+export const FibonacciScalarFieldEnum = {
+  id: 'id',
+  index: 'index',
+  result: 'result',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FibonacciScalarFieldEnum = (typeof FibonacciScalarFieldEnum)[keyof typeof FibonacciScalarFieldEnum]
 
 
 export const PhoneScalarFieldEnum = {

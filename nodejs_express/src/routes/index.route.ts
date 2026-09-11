@@ -4,6 +4,7 @@ import { userController } from "../controllers/user.controller.js";
 import { courseController } from "../controllers/course.controller.js";
 import { authController } from "../controllers/auth.controller.js";
 import { authMiddleware } from "../middlewares/auth.middleware.js";
+import { demoController } from "../controllers/demo.controller.js";
 const router = express.Router();
 
 //Register route
@@ -40,5 +41,7 @@ router.delete('/auth/logout', authMiddleware, authController.logout);
 router.post('/auth/refresh-token', authController.refreshToken);
 router.post('/auth/forgot-password', authController.forgotPassword);
 router.put('/auth/reset-password', authController.resetPassword);
+
+router.post('/fibnacci', demoController.calcFibonacci);
 
 export default router;

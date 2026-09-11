@@ -3,6 +3,7 @@ import indexRouter from "./routes/index.route.js";
 import { loggerMiddleware } from "./middlewares/logger.middleware.js";
 import { demoMiddleware } from "./middlewares/demo.middleware.js";
 import { errorMiddleware, notFoundMiddleware } from "./middlewares/error.middleware.js";
+import "./schedulers/index.scheduler.js";
 const PORT = 3000;
 const app = express();
 

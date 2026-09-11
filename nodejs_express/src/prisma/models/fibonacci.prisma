@@ -1,0 +1,10 @@
+model Fibonacci {
+    id        Int      @id @default(autoincrement())
+    index     Int
+    result    Int
+    createdAt DateTime @default(now()) @db.Timestamp
+    updatedAt DateTime @default(now()) @db.Timestamp
+
+    @@unique([index, result])
+    @@map("fibonacci")
+}

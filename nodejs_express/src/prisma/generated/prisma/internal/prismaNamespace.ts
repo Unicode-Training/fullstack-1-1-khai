@@ -398,6 +398,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Course: 'Course',
+  Fibonacci: 'Fibonacci',
   Phone: 'Phone',
   ProductImage: 'ProductImage',
   Product: 'Product',
@@ -418,7 +419,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "course" | "phone" | "productImage" | "product" | "userCourse" | "user"
+    modelProps: "course" | "fibonacci" | "phone" | "productImage" | "product" | "userCourse" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -485,6 +486,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CourseCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CourseCountAggregateOutputType> | number
+        }
+      }
+    }
+    Fibonacci: {
+      payload: Prisma.$FibonacciPayload<ExtArgs>
+      fields: Prisma.FibonacciFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FibonacciFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FibonacciPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FibonacciFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FibonacciPayload>
+        }
+        findFirst: {
+          args: Prisma.FibonacciFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FibonacciPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FibonacciFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FibonacciPayload>
+        }
+        findMany: {
+          args: Prisma.FibonacciFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FibonacciPayload>[]
+        }
+        create: {
+          args: Prisma.FibonacciCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FibonacciPayload>
+        }
+        createMany: {
+          args: Prisma.FibonacciCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.FibonacciDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FibonacciPayload>
+        }
+        update: {
+          args: Prisma.FibonacciUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FibonacciPayload>
+        }
+        deleteMany: {
+          args: Prisma.FibonacciDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FibonacciUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.FibonacciUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FibonacciPayload>
+        }
+        aggregate: {
+          args: Prisma.FibonacciAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFibonacci>
+        }
+        groupBy: {
+          args: Prisma.FibonacciGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FibonacciGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FibonacciCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FibonacciCountAggregateOutputType> | number
         }
       }
     }
@@ -868,6 +935,17 @@ export const CourseScalarFieldEnum = {
 export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
 
 
+export const FibonacciScalarFieldEnum = {
+  id: 'id',
+  index: 'index',
+  result: 'result',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FibonacciScalarFieldEnum = (typeof FibonacciScalarFieldEnum)[keyof typeof FibonacciScalarFieldEnum]
+
+
 export const PhoneScalarFieldEnum = {
   id: 'id',
   phone: 'phone',
@@ -1173,6 +1251,7 @@ export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions 
 export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
   course?: Prisma.CourseOmit
+  fibonacci?: Prisma.FibonacciOmit
   phone?: Prisma.PhoneOmit
   productImage?: Prisma.ProductImageOmit
   product?: Prisma.ProductOmit
