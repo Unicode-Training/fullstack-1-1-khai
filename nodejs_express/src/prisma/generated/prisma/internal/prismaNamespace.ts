@@ -400,6 +400,7 @@ export const ModelName = {
   Course: 'Course',
   Fibonacci: 'Fibonacci',
   Phone: 'Phone',
+  Post: 'Post',
   ProductImage: 'ProductImage',
   Product: 'Product',
   UserCourse: 'UserCourse',
@@ -419,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "course" | "fibonacci" | "phone" | "productImage" | "product" | "userCourse" | "user"
+    modelProps: "course" | "fibonacci" | "phone" | "post" | "productImage" | "product" | "userCourse" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -618,6 +619,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.PhoneCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.PhoneCountAggregateOutputType> | number
+        }
+      }
+    }
+    Post: {
+      payload: Prisma.$PostPayload<ExtArgs>
+      fields: Prisma.PostFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PostFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PostFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>
+        }
+        findFirst: {
+          args: Prisma.PostFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PostFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>
+        }
+        findMany: {
+          args: Prisma.PostFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>[]
+        }
+        create: {
+          args: Prisma.PostCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>
+        }
+        createMany: {
+          args: Prisma.PostCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.PostDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>
+        }
+        update: {
+          args: Prisma.PostUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>
+        }
+        deleteMany: {
+          args: Prisma.PostDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PostUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.PostUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>
+        }
+        aggregate: {
+          args: Prisma.PostAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePost>
+        }
+        groupBy: {
+          args: Prisma.PostGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PostGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PostCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PostCountAggregateOutputType> | number
         }
       }
     }
@@ -957,6 +1024,17 @@ export const PhoneScalarFieldEnum = {
 export type PhoneScalarFieldEnum = (typeof PhoneScalarFieldEnum)[keyof typeof PhoneScalarFieldEnum]
 
 
+export const PostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+
+
 export const ProductImageScalarFieldEnum = {
   id: 'id',
   imageUrl: 'imageUrl',
@@ -1025,6 +1103,14 @@ export const PhoneOrderByRelevanceFieldEnum = {
 } as const
 
 export type PhoneOrderByRelevanceFieldEnum = (typeof PhoneOrderByRelevanceFieldEnum)[keyof typeof PhoneOrderByRelevanceFieldEnum]
+
+
+export const PostOrderByRelevanceFieldEnum = {
+  title: 'title',
+  content: 'content'
+} as const
+
+export type PostOrderByRelevanceFieldEnum = (typeof PostOrderByRelevanceFieldEnum)[keyof typeof PostOrderByRelevanceFieldEnum]
 
 
 export const ProductImageOrderByRelevanceFieldEnum = {
@@ -1253,6 +1339,7 @@ export type GlobalOmitConfig = {
   course?: Prisma.CourseOmit
   fibonacci?: Prisma.FibonacciOmit
   phone?: Prisma.PhoneOmit
+  post?: Prisma.PostOmit
   productImage?: Prisma.ProductImageOmit
   product?: Prisma.ProductOmit
   userCourse?: Prisma.UserCourseOmit

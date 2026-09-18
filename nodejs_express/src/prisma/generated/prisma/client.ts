@@ -57,6 +57,11 @@ export type Fibonacci = Prisma.FibonacciModel
  */
 export type Phone = Prisma.PhoneModel
 /**
+ * Model Post
+ * 
+ */
+export type Post = Prisma.PostModel
+/**
  * Model ProductImage
  * 
  */

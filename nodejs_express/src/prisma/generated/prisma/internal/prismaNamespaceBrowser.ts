@@ -54,6 +54,7 @@ export const ModelName = {
   Course: 'Course',
   Fibonacci: 'Fibonacci',
   Phone: 'Phone',
+  Post: 'Post',
   ProductImage: 'ProductImage',
   Product: 'Product',
   UserCourse: 'UserCourse',
@@ -107,6 +108,17 @@ export const PhoneScalarFieldEnum = {
 } as const
 
 export type PhoneScalarFieldEnum = (typeof PhoneScalarFieldEnum)[keyof typeof PhoneScalarFieldEnum]
+
+
+export const PostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
 
 
 export const ProductImageScalarFieldEnum = {
@@ -177,6 +189,14 @@ export const PhoneOrderByRelevanceFieldEnum = {
 } as const
 
 export type PhoneOrderByRelevanceFieldEnum = (typeof PhoneOrderByRelevanceFieldEnum)[keyof typeof PhoneOrderByRelevanceFieldEnum]
+
+
+export const PostOrderByRelevanceFieldEnum = {
+  title: 'title',
+  content: 'content'
+} as const
+
+export type PostOrderByRelevanceFieldEnum = (typeof PostOrderByRelevanceFieldEnum)[keyof typeof PostOrderByRelevanceFieldEnum]
 
 
 export const ProductImageOrderByRelevanceFieldEnum = {
