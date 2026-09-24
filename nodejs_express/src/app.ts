@@ -4,8 +4,22 @@ import { loggerMiddleware } from "./middlewares/logger.middleware.js";
 import { demoMiddleware } from "./middlewares/demo.middleware.js";
 import { errorMiddleware, notFoundMiddleware } from "./middlewares/error.middleware.js";
 import "./schedulers/index.scheduler.js";
+import { Server } from "socket.io";
+import { createServer } from "http";
+import cors from "cors";
+import { webSocket } from "./socket/socket.js";
 const PORT = 3000;
 const app = express();
+
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
+    cors: {
+        origin: "*"
+    }
+});
+
+webSocket(io);
 
 //Config middleware
 app.use(express.json());
@@ -14,7 +28,9 @@ app.use(express.json());
 app.use(loggerMiddleware);
 app.use(demoMiddleware);
 
-app.use(indexRouter);
+app.use(cors())
+
+app.use('/api', indexRouter);
 
 //Route không khớp chạy tiếp xuống dưới
 
@@ -24,7 +40,7 @@ app.use(notFoundMiddleware);
 //Error Handling
 app.use(errorMiddleware);
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
     console.log(`Đang chạy với PORT: ${PORT}`);
 });
 

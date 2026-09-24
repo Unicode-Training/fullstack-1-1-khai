@@ -1,27 +1,27 @@
+import { CACHE_KEYS, CACHE_TTL } from "../constants/cache.constant.js";
 import { prisma } from "../lib/prisma.js"
 import { PostQuery } from "../types/post.type.js";
 import { cache } from "../utils/cache.js";
 
 export const postService = {
-    async findAll({ q = "" }: PostQuery) {
-        const version = await cache.getKeyVersion('posts:version');
-        const cacheKey = `posts:v${version}${q ? ':' + q : ""}`;
-        const ttl = 3600;
+    async findAll(query: PostQuery) {
+        const { q } = query;
+        const version = await cache.getKeyVersion(CACHE_KEYS.POSTS.VERSION_KEY);
+        const cacheKey = CACHE_KEYS.POSTS.LIST(version, query);
+        const ttl = CACHE_TTL.POSTS.LIST;
         return cache.remember(cacheKey, () => prisma.post.findMany({
             where: {
                 title: {
                     contains: q
                 }
             },
-            omit: {
-                content: true
-            }
+
         }), ttl);
     },
 
     async find(id: number) {
-        const cacheKey = `posts:detail:${id}`;
-        const ttl = 3600;
+        const cacheKey = CACHE_KEYS.POSTS.DETAIL(id);
+        const ttl = CACHE_TTL.POSTS.DETAIL;
         return cache.remember(cacheKey, () => prisma.post.findUnique({
             where: { id }
         }), ttl);
@@ -33,20 +33,37 @@ export const postService = {
         });
         //clear cache
         // await redis.incr(`cache:posts-version`); //Tự động tăng lên 1 đơn vị
-        await cache.incrementKeyVersion('posts:version');
+        await cache.incrementKeyVersion(CACHE_KEYS.POSTS.VERSION_KEY);
 
         return post;
     },
 
     async update(postData: { title: string; content: string }, id: number) {
-        const cacheKey = `posts:detail:${id}`;
+        const cacheKey = CACHE_KEYS.POSTS.DETAIL(id);
         const post = await prisma.post.update({
             where: { id },
             data: postData
         });
         await cache.delete(cacheKey);
-        await cache.incrementKeyVersion('posts:version');
+        await cache.incrementKeyVersion(CACHE_KEYS.POSTS.VERSION_KEY);
         return post;
+    },
+
+    async getComments(postId: number) {
+        return prisma.comment.findMany({
+            where: {
+                postId
+            },
+            orderBy: {
+                createdAt: 'desc'
+            }
+        })
+    },
+
+    async createComment(body: { name: string, email: string, message: string, postId: number }) {
+        return prisma.comment.create({
+            data: body
+        })
     }
 }
 

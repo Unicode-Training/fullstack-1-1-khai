@@ -1,9 +1,10 @@
 model Post {
-    id        Int      @id @default(autoincrement())
+    id        Int       @id @default(autoincrement())
     title     String
-    content   String   @db.Text()
-    createdAt DateTime @default(now()) @db.Timestamp
-    updatedAt DateTime @default(now()) @db.Timestamp
+    content   String    @db.Text()
+    createdAt DateTime  @default(now()) @db.Timestamp
+    updatedAt DateTime  @default(now()) @db.Timestamp
+    comments  Comment[]
 
     @@map("posts")
 }

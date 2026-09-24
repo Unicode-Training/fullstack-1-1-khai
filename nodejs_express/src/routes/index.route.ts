@@ -50,4 +50,8 @@ router.get('/posts/:id', postController.find);
 router.post('/posts', postController.create);
 router.put('/posts/:id', postController.update);
 
+router.get('/posts/:postId/comments', postController.comments);
+router.post('/posts/:postId/comments', postController.createComment);
+
+
 export default router;

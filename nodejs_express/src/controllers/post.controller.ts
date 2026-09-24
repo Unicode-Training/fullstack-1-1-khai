@@ -36,5 +36,29 @@ export const postController = {
             success: true,
             message: "Update post success"
         })
+    },
+
+    async comments(req: Request, res: Response) {
+        const { postId } = req.params;
+        const data = await postService.getComments(+postId!);
+        return res.json({
+            data,
+            success: true,
+            message: "Get comments success"
+        })
+    },
+
+    async createComment(req: Request, res: Response) {
+        const { postId } = req.params;
+        const body = req.body;
+        const data = await postService.createComment({
+            ...body,
+            postId: +postId!
+        })
+        return res.json({
+            data,
+            success: true,
+            message: "Get comments success"
+        })
     }
 }

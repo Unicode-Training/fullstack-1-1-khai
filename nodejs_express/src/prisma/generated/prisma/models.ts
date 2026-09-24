@@ -8,6 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Comment.js'
 export type * from './models/Course.js'
 export type * from './models/Fibonacci.js'
 export type * from './models/Phone.js'
